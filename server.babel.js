@@ -17,6 +17,11 @@ import groupController from './src/controllers/groupsController';
 import peopleController from './src/controllers/peopleController';
 import checkinController from './src/controllers/checkinController';
 
+
+var Papa = require('babyparse');
+var fs = require('fs');
+var file = 'text.csv';
+
 const port = process.env.PORT || 9090;
 
 
@@ -31,7 +36,35 @@ app.use("/api", checkinController);
 app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'pug');
 
+app.get('/csv2json',(req, res)=>{
+  var content = fs.readFileSync(file, { encoding: 'utf8' });
+  var arr = Papa.parse(content,{
+	header: true
+}).data;
 
+  res.json(array2json(arr));
+
+});
+
+function array2json(arr){
+  var json = [];
+  arr.forEach(function(obj){
+    var eachJson = {};
+    var gpJson = {};
+    Object.keys(obj).forEach(function(key) {
+
+      if(key == 'group' || key == 'unit'){
+        gpJson[key] = obj[key];
+      }else{
+        eachJson[key] = obj[key];
+      }
+    });
+    eachJson.group = gpJson;
+    json.push(eachJson);
+  });
+  console.log(json);
+  return json;
+}
 
 function renderHTML(req, res) {
   renderHTMLString(routes, req, (error, redirectLocation, html) => {
