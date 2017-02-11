@@ -54,7 +54,9 @@ require('source-map-support').install({environment: 'node'});
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _path=__webpack_require__(2);var _path2=_interopRequireDefault(_path);var _express=__webpack_require__(3);var _express2=_interopRequireDefault(_express);var _compression=__webpack_require__(4);var _compression2=_interopRequireDefault(_compression);var _cookieParser=__webpack_require__(5);var _cookieParser2=_interopRequireDefault(_cookieParser);var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _server=__webpack_require__(7);var _server2=_interopRequireDefault(_server);var _routes=__webpack_require__(176);var _routes2=_interopRequireDefault(_routes);var _router=__webpack_require__(592);var _RubixAssetMiddleware=__webpack_require__(605);var _RubixAssetMiddleware2=_interopRequireDefault(_RubixAssetMiddleware);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var port=process.env.PORT||9090;var app=(0,_express2.default)();app.use((0,_compression2.default)());app.use((0,_cookieParser2.default)());app.use(_express2.default.static(_path2.default.join(process.cwd(),'public')));app.set('views',_path2.default.join(process.cwd(),'views'));app.set('view engine','pug');function renderHTML(req,res){(0,_router.renderHTMLString)(_routes2.default,req,function(error,redirectLocation,html){if(error){if(error.message==='Not found'){res.status(404).send(error.message);}else{res.status(500).send(error.message);}}else if(redirectLocation){res.redirect(302,redirectLocation.pathname+redirectLocation.search);}else{res.render('index',{content:html});}});}app.get('*',(0,_RubixAssetMiddleware2.default)('ltr'),function(req,res,next){renderHTML(req,res);});app.listen(port,function(){console.log('Node.js app is running at http://localhost:'+port+'/');});;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(port,'port','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(app,'app','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(renderHTML,'renderHTML','/Users/wangyansheng/Documents/code/wensu/server.babel.js');}();;
+	'use strict';var _path=__webpack_require__(2);var _path2=_interopRequireDefault(_path);var _express=__webpack_require__(3);var _express2=_interopRequireDefault(_express);var _compression=__webpack_require__(4);var _compression2=_interopRequireDefault(_compression);var _cookieParser=__webpack_require__(5);var _cookieParser2=_interopRequireDefault(_cookieParser);var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _server=__webpack_require__(7);var _server2=_interopRequireDefault(_server);var _routes=__webpack_require__(176);var _routes2=_interopRequireDefault(_routes);var _router=__webpack_require__(597);var _RubixAssetMiddleware=__webpack_require__(610);var _RubixAssetMiddleware2=_interopRequireDefault(_RubixAssetMiddleware);var _mongoose=__webpack_require__(611);var _mongoose2=_interopRequireDefault(_mongoose);var _groupsController=__webpack_require__(612);var _groupsController2=_interopRequireDefault(_groupsController);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var port=process.env.PORT||9090;//controllers
+	var app=(0,_express2.default)();app.use((0,_compression2.default)());app.use((0,_cookieParser2.default)());app.use(_express2.default.static(_path2.default.join(process.cwd(),'public')));app.use("/api",_groupsController2.default);app.set('views',_path2.default.join(process.cwd(),'views'));app.set('view engine','pug');function renderHTML(req,res){(0,_router.renderHTMLString)(_routes2.default,req,function(error,redirectLocation,html){if(error){if(error.message==='Not found'){res.status(404).send(error.message);}else{res.status(500).send(error.message);}}else if(redirectLocation){res.redirect(302,redirectLocation.pathname+redirectLocation.search);}else{res.render('index',{content:html});}});}app.get('*',(0,_RubixAssetMiddleware2.default)('ltr'),function(req,res,next){renderHTML(req,res);});app.listen(port,function(){console.log('Node.js app is running at http://localhost:'+port+'/');});// Connect to our mongo database
+	_mongoose2.default.connect('mongodb://localhost:27017/wensu');var db=_mongoose2.default.connection;db.on('error',console.error.bind(console,'connection error:'));db.once('open',function callback(){console.log("Database Connected.");});;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(port,'port','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(app,'app','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(renderHTML,'renderHTML','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(db,'db','/Users/wangyansheng/Documents/code/wensu/server.babel.js');}();;
 
 /***/ },
 /* 2 */
@@ -20254,7 +20256,7 @@ require('source-map-support').install({environment: 'node'});
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';exports.__esModule=true;var _classCallCheck2=__webpack_require__(177);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(178);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(247);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(255);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(256);var _rubix=__webpack_require__(257);var _footer=__webpack_require__(587);var _footer2=_interopRequireDefault(_footer);var _header=__webpack_require__(588);var _header2=_interopRequireDefault(_header);var _sidebar=__webpack_require__(589);var _sidebar2=_interopRequireDefault(_sidebar);var _home=__webpack_require__(590);var _home2=_interopRequireDefault(_home);var _Login=__webpack_require__(591);var _Login2=_interopRequireDefault(_Login);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}/* Pages */var App=function(_React$Component){(0,_inherits3.default)(App,_React$Component);function App(){(0,_classCallCheck3.default)(this,App);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}App.prototype.render=function render(){return _react2.default.createElement(_rubix.MainContainer,this.props,_react2.default.createElement(_sidebar2.default,null),_react2.default.createElement(_header2.default,null),_react2.default.createElement('div',{id:'body'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:12},this.props.children)))),_react2.default.createElement(_footer2.default,null));};return App;}(_react2.default.Component);/* Common Components */var _default=_react2.default.createElement(_reactRouter.Route,{path:'/',component:App},_react2.default.createElement(_reactRouter.IndexRoute,{component:_home2.default}),_react2.default.createElement(_reactRouter.Route,{path:'login',component:_Login2.default}));exports.default=_default;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(App,'App','/Users/wangyansheng/Documents/code/wensu/src/routes.js');__REACT_HOT_LOADER__.register(_default,'default','/Users/wangyansheng/Documents/code/wensu/src/routes.js');}();;
+	'use strict';exports.__esModule=true;var _classCallCheck2=__webpack_require__(177);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(178);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(247);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(255);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(256);var _rubix=__webpack_require__(257);var _footer=__webpack_require__(587);var _footer2=_interopRequireDefault(_footer);var _header=__webpack_require__(588);var _header2=_interopRequireDefault(_header);var _sidebar=__webpack_require__(589);var _sidebar2=_interopRequireDefault(_sidebar);var _home=__webpack_require__(590);var _home2=_interopRequireDefault(_home);var _Login=__webpack_require__(596);var _Login2=_interopRequireDefault(_Login);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}/* Pages */var App=function(_React$Component){(0,_inherits3.default)(App,_React$Component);function App(){(0,_classCallCheck3.default)(this,App);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}App.prototype.render=function render(){return _react2.default.createElement(_rubix.MainContainer,this.props,_react2.default.createElement(_sidebar2.default,null),_react2.default.createElement(_header2.default,null),_react2.default.createElement('div',{id:'body'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:12},this.props.children)))),_react2.default.createElement(_footer2.default,null));};return App;}(_react2.default.Component);/* Common Components */var _default=_react2.default.createElement(_reactRouter.Route,{path:'/',component:App},_react2.default.createElement(_reactRouter.IndexRoute,{component:_home2.default}),_react2.default.createElement(_reactRouter.Route,{path:'login',component:_Login2.default}));exports.default=_default;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(App,'App','/Users/wangyansheng/Documents/code/wensu/src/routes.js');__REACT_HOT_LOADER__.register(_default,'default','/Users/wangyansheng/Documents/code/wensu/src/routes.js');}();;
 
 /***/ },
 /* 177 */
@@ -48436,20 +48438,54 @@ require('source-map-support').install({environment: 'node'});
 /* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(177);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(178);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(247);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _rubix=__webpack_require__(257);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}//設定欄 放欄位篩選 例如：乾坤 大組 單位
-	var Home=function(_React$Component){(0,_inherits3.default)(Home,_React$Component);function Home(){(0,_classCallCheck3.default)(this,Home);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}Home.prototype.search=function search(){console.log(this);};Home.prototype.render=function render(){// return (
+	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(177);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(178);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(247);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _rubix=__webpack_require__(257);var _groupService=__webpack_require__(591);var _groupService2=_interopRequireDefault(_groupService);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}//設定欄 放欄位篩選 例如：乾坤 大組 單位
+	var Home=function(_React$Component){(0,_inherits3.default)(Home,_React$Component);function Home(){(0,_classCallCheck3.default)(this,Home);var _this=(0,_possibleConstructorReturn3.default)(this,_React$Component.call(this));_this.search=_this.search.bind(_this);_this.state={sex:'male',groups:[]};return _this;}Home.prototype.componentDidMount=function componentDidMount(){var _this2=this;_groupService2.default.getGroups().then(function(res){console.log(res);_this2.setState({groups:res});});};Home.prototype.search=function search(){console.log('search');};Home.prototype.render=function render(){// return (
 	//   // <div>Hello World!</div>
 	// );
-	return _react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12},_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.ControlLabel,null,'\u4E7E\u5764'),_react2.default.createElement('div',null,_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'option1',defaultChecked:true,name:'inline-radio-options'},'\u4E7E\u9053'),_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'option2',name:'inline-radio-options'},'\u5764\u9053')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u5927\u7D44'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},_react2.default.createElement('option',{value:'1'},'\u7B2C\u4E00\u7D44'),_react2.default.createElement('option',{value:'2'},'\u7B2C\u4E8C\u7D44'),_react2.default.createElement('option',{value:'3'},'\u7B2C\u4E09\u7D44'),_react2.default.createElement('option',{value:'4'},'\u7B2C\u56DB\u7D44'),_react2.default.createElement('option',{value:'5'},'\u7B2C\u4E94\u7D44'),_react2.default.createElement('option',{value:'5'},'\u7B2C\u516D\u7D44')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u55AE\u4F4D'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},_react2.default.createElement('option',{value:'1'},'\u4E2D\u90B1'),_react2.default.createElement('option',{value:'2'},'\u7B2C\u4E8C\u7D44'),_react2.default.createElement('option',{value:'3'},'\u7B2C\u4E09\u7D44'),_react2.default.createElement('option',{value:'4'},'\u7B2C\u56DB\u7D44'),_react2.default.createElement('option',{value:'5'},'\u7B2C\u4E94\u7D44'),_react2.default.createElement('option',{value:'5'},'\u7B2C\u516D\u7D44'))))))),_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12,md:8},_react2.default.createElement(_rubix.FormGroup,{controlId:'searchbtnicon'},_react2.default.createElement(_rubix.Col,{sm:12},_react2.default.createElement(_rubix.InputGroup,null,_react2.default.createElement(_rubix.FormControl,{type:'text',placeholder:'\u8ACB\u8F38\u5165\u95DC\u9375\u5B57 ...',onChange:this.search.bind(this)}),_react2.default.createElement(_rubix.InputGroup.Addon,{className:'plain'},_react2.default.createElement(_rubix.Button,{onClick:this.search.bind(this)},_react2.default.createElement('span',null,'\u641C\u5C0B '),_react2.default.createElement(_rubix.Icon,{bundle:'fontello',glyph:'search'})))))),_react2.default.createElement(_rubix.Table,{striped:true,bordered:true,condensed:true,hover:true},_react2.default.createElement('thead',null,_react2.default.createElement('tr',null,_react2.default.createElement('th',null,'#'),_react2.default.createElement('th',null,'\u59D3\u540D'),_react2.default.createElement('th',null,'\u5927\u7D44'),_react2.default.createElement('th',null,'\u55AE\u4F4D'))),_react2.default.createElement('tbody',null,_react2.default.createElement('tr',null,_react2.default.createElement('td',null,'1'),_react2.default.createElement('td',null,'Mark'),_react2.default.createElement('td',null,'Otto'),_react2.default.createElement('td',null,'@mdo')),_react2.default.createElement('tr',null,_react2.default.createElement('td',null,'2'),_react2.default.createElement('td',null,'Jacob'),_react2.default.createElement('td',null,'Thornton'),_react2.default.createElement('td',null,'@fat')),_react2.default.createElement('tr',null,_react2.default.createElement('td',null,'3'),_react2.default.createElement('td',{colSpan:'2'},'Larry the Bird'),_react2.default.createElement('td',null,'@twitter'))))),_react2.default.createElement(_rubix.Col,{xs:6,md:4},_react2.default.createElement('code',null,'<','Col xs={6} md={4}',' />'))));};return Home;}(_react2.default.Component);exports.default=Home;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Home,'Home','/Users/wangyansheng/Documents/code/wensu/src/routes/home.js');}();;
+	return _react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12},_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.ControlLabel,null,'\u4E7E\u5764'),_react2.default.createElement('div',null,_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'male',defaultChecked:true,name:'inline-radio-options'},'\u4E7E\u9053'),_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'female',name:'inline-radio-options'},'\u5764\u9053')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u5927\u7D44'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},_react2.default.createElement('option',{value:'\u7B2C\u4E00\u7D44'},'\u7B2C\u4E00\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E8C\u7D44'},'\u7B2C\u4E8C\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E09\u7D44'},'\u7B2C\u4E09\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u56DB\u7D44'},'\u7B2C\u56DB\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E94\u7D44'},'\u7B2C\u4E94\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u516D\u7D44'},'\u7B2C\u516D\u7D44')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u55AE\u4F4D'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},this.state.groups.map(function(group){return _react2.default.createElement('option',{key:group._id},group.unit);}))))))),_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12,md:8},_react2.default.createElement(_rubix.FormGroup,{controlId:'searchbtnicon'},_react2.default.createElement(_rubix.Col,{sm:12},_react2.default.createElement(_rubix.InputGroup,null,_react2.default.createElement(_rubix.FormControl,{type:'text',placeholder:'\u8ACB\u8F38\u5165\u95DC\u9375\u5B57 ...',onChange:this.search}),_react2.default.createElement(_rubix.InputGroup.Addon,{className:'plain'},_react2.default.createElement(_rubix.Button,{onClick:this.search},_react2.default.createElement('span',null,'\u641C\u5C0B '),_react2.default.createElement(_rubix.Icon,{bundle:'fontello',glyph:'search'})))))),_react2.default.createElement(_rubix.Table,{striped:true,bordered:true,condensed:true,hover:true},_react2.default.createElement('thead',null,_react2.default.createElement('tr',null,_react2.default.createElement('th',null,'#'),_react2.default.createElement('th',null,'\u59D3\u540D'),_react2.default.createElement('th',null,'\u5927\u7D44'),_react2.default.createElement('th',null,'\u55AE\u4F4D'))),_react2.default.createElement('tbody',null,_react2.default.createElement('tr',null,_react2.default.createElement('td',null,'1'),_react2.default.createElement('td',null,'Mark'),_react2.default.createElement('td',null,'Otto'),_react2.default.createElement('td',null,'@mdo')),_react2.default.createElement('tr',null,_react2.default.createElement('td',null,'2'),_react2.default.createElement('td',null,'Jacob'),_react2.default.createElement('td',null,'Thornton'),_react2.default.createElement('td',null,'@fat')),_react2.default.createElement('tr',null,_react2.default.createElement('td',null,'3'),_react2.default.createElement('td',{colSpan:'2'},'Larry the Bird'),_react2.default.createElement('td',null,'@twitter'))))),_react2.default.createElement(_rubix.Col,{xs:6,md:4},_react2.default.createElement('code',null,'<','Col xs={6} md={4}',' />'))));};return Home;}(_react2.default.Component);exports.default=Home;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Home,'Home','/Users/wangyansheng/Documents/code/wensu/src/routes/home.js');}();;
 
 /***/ },
 /* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(177);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(178);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(247);var _inherits3=_interopRequireDefault(_inherits2);var _class;var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(255);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(256);var _rubix=__webpack_require__(257);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var Login=(0,_reactRouter.withRouter)(_class=function(_React$Component){(0,_inherits3.default)(Login,_React$Component);function Login(){(0,_classCallCheck3.default)(this,Login);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}Login.prototype.back=function back(e){e.preventDefault();e.stopPropagation();this.props.router.goBack();};Login.prototype.componentDidMount=function componentDidMount(){$('html').addClass('authentication');};Login.prototype.componentWillUnmount=function componentWillUnmount(){$('html').removeClass('authentication');};Login.prototype.getPath=function getPath(path){var dir=this.props.location.pathname.search('rtl')!==-1?'rtl':'ltr';path='/'+dir+'/'+path;return path;};Login.prototype.render=function render(){return _react2.default.createElement('div',{id:'auth-container',className:'login'},_react2.default.createElement('div',{id:'auth-row'},_react2.default.createElement('div',{id:'auth-cell'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{sm:4,smOffset:4,xs:10,xsOffset:1,collapseLeft:true,collapseRight:true},_react2.default.createElement(_rubix.PanelContainer,{controls:false},_react2.default.createElement(_rubix.Panel,null,_react2.default.createElement(_rubix.PanelBody,{style:{padding:0}},_react2.default.createElement('div',{className:'text-center bg-darkblue fg-white'},_react2.default.createElement('h3',{style:{margin:0,padding:25}},'\u767B\u5165\u6587\u66F8\u7CFB\u7D71')),_react2.default.createElement('div',null,_react2.default.createElement('div',{style:{padding:25,paddingTop:0,paddingBottom:0,margin:'auto',marginBottom:25,marginTop:25}},_react2.default.createElement(_rubix.Form,{onSubmit:this.back.bind(this)},_react2.default.createElement(_rubix.FormGroup,{controlId:'emailaddress'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-mail'})),_react2.default.createElement(_rubix.FormControl,{autoFocus:true,type:'email',className:'border-focus-blue',placeholder:'support@sketchpixy.com'}))),_react2.default.createElement(_rubix.FormGroup,{controlId:'password'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-key'})),_react2.default.createElement(_rubix.FormControl,{type:'password',className:'border-focus-blue',placeholder:'password'}))),_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,style:{paddingTop:10}},_react2.default.createElement(_reactRouter.Link,{to:this.getPath.call(this,'signup')},'Create a Rubix account')),_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,className:'text-right'},_react2.default.createElement(_rubix.Button,{outlined:true,lg:true,type:'submit',bsStyle:'blue',onClick:this.back.bind(this)},'\u767B\u5165')))))))))))))))));};return Login;}(_react2.default.Component))||_class;exports.default=Login;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Login,'Login','/Users/wangyansheng/Documents/code/wensu/src/routes/Login.js');}();;
+	"use strict";var _stringify=__webpack_require__(592);var _stringify2=_interopRequireDefault(_stringify);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var $=__webpack_require__(594);var promise=__webpack_require__(595);var resourceUrl="http://localhost:9090/api/groups";module.exports={addGroup:function addGroup(group){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl,data:(0,_stringify2.default)(group),method:"POST",dataType:"json",contentType:"application/json",success:resolve,error:reject});});},getGroups:function getGroups(){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl,method:"GET",dataType:"json",success:resolve,error:reject});});},deleteGroup:function deleteGroup(group){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl+"/"+group._id,method:"DELETE",dataType:"json",success:resolve,error:reject});});}};;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(resourceUrl,"resourceUrl","/Users/wangyansheng/Documents/code/wensu/src/services/groupService.js");}();;
 
 /***/ },
 /* 592 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(593), __esModule: true };
+
+/***/ },
+/* 593 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(190)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 594 */
+/***/ function(module, exports) {
+
+	module.exports = require("jquery");
+
+/***/ },
+/* 595 */
+/***/ function(module, exports) {
+
+	module.exports = require("es6-promise");
+
+/***/ },
+/* 596 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(177);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(178);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(247);var _inherits3=_interopRequireDefault(_inherits2);var _class;var _react=__webpack_require__(6);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(255);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(256);var _rubix=__webpack_require__(257);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var Login=(0,_reactRouter.withRouter)(_class=function(_React$Component){(0,_inherits3.default)(Login,_React$Component);function Login(){(0,_classCallCheck3.default)(this,Login);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}Login.prototype.back=function back(e){e.preventDefault();e.stopPropagation();this.props.router.goBack();};Login.prototype.componentDidMount=function componentDidMount(){$('html').addClass('authentication');};Login.prototype.componentWillUnmount=function componentWillUnmount(){$('html').removeClass('authentication');};Login.prototype.getPath=function getPath(path){var dir=this.props.location.pathname.search('rtl')!==-1?'rtl':'ltr';path='/'+dir+'/'+path;return path;};Login.prototype.render=function render(){return _react2.default.createElement('div',{id:'auth-container',className:'login'},_react2.default.createElement('div',{id:'auth-row'},_react2.default.createElement('div',{id:'auth-cell'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{sm:4,smOffset:4,xs:10,xsOffset:1,collapseLeft:true,collapseRight:true},_react2.default.createElement(_rubix.PanelContainer,{controls:false},_react2.default.createElement(_rubix.Panel,null,_react2.default.createElement(_rubix.PanelBody,{style:{padding:0}},_react2.default.createElement('div',{className:'text-center bg-darkblue fg-white'},_react2.default.createElement('h3',{style:{margin:0,padding:25}},'\u767B\u5165\u6587\u66F8\u7CFB\u7D71')),_react2.default.createElement('div',null,_react2.default.createElement('div',{style:{padding:25,paddingTop:0,paddingBottom:0,margin:'auto',marginBottom:25,marginTop:25}},_react2.default.createElement(_rubix.Form,{onSubmit:this.back.bind(this)},_react2.default.createElement(_rubix.FormGroup,{controlId:'emailaddress'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-mail'})),_react2.default.createElement(_rubix.FormControl,{autoFocus:true,type:'email',className:'border-focus-blue',placeholder:'support@sketchpixy.com'}))),_react2.default.createElement(_rubix.FormGroup,{controlId:'password'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-key'})),_react2.default.createElement(_rubix.FormControl,{type:'password',className:'border-focus-blue',placeholder:'password'}))),_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,style:{paddingTop:10}},_react2.default.createElement(_reactRouter.Link,{to:this.getPath.call(this,'signup')},'Create a Rubix account')),_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,className:'text-right'},_react2.default.createElement(_rubix.Button,{outlined:true,lg:true,type:'submit',bsStyle:'blue',onClick:this.back.bind(this)},'\u767B\u5165')))))))))))))))));};return Login;}(_react2.default.Component))||_class;exports.default=Login;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Login,'Login','/Users/wangyansheng/Documents/code/wensu/src/routes/Login.js');}();;
+
+/***/ },
+/* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48495,17 +48531,17 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _reactRouter = __webpack_require__(256);
 	
-	var _reactHotLoader = __webpack_require__(593);
+	var _reactHotLoader = __webpack_require__(598);
 	
-	var _reactRouterScroll = __webpack_require__(594);
+	var _reactRouterScroll = __webpack_require__(599);
 	
 	var _reactRouterScroll2 = _interopRequireDefault(_reactRouterScroll);
 	
-	var _onRouterSetup = __webpack_require__(600);
+	var _onRouterSetup = __webpack_require__(605);
 	
 	var _onRouterSetup2 = _interopRequireDefault(_onRouterSetup);
 	
-	var _checkScroll = __webpack_require__(602);
+	var _checkScroll = __webpack_require__(607);
 	
 	var _checkScroll2 = _interopRequireDefault(_checkScroll);
 	
@@ -48591,13 +48627,13 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 593 */
+/* 598 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-hot-loader");
 
 /***/ },
-/* 594 */
+/* 599 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48609,7 +48645,7 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ScrollBehaviorContainer = __webpack_require__(595);
+	var _ScrollBehaviorContainer = __webpack_require__(600);
 	
 	var _ScrollBehaviorContainer2 = _interopRequireDefault(_ScrollBehaviorContainer);
 	
@@ -48632,7 +48668,7 @@ require('source-map-support').install({environment: 'node'});
 	module.exports = exports['default'];
 
 /***/ },
-/* 595 */
+/* 600 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48643,7 +48679,7 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ScrollBehavior = __webpack_require__(596);
+	var _ScrollBehavior = __webpack_require__(601);
 	
 	var _ScrollBehavior2 = _interopRequireDefault(_ScrollBehavior);
 	
@@ -48724,7 +48760,7 @@ require('source-map-support').install({environment: 'node'});
 
 
 /***/ },
-/* 596 */
+/* 601 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48747,13 +48783,13 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _scrollTop2 = _interopRequireDefault(_scrollTop);
 	
-	var _requestAnimationFrame = __webpack_require__(597);
+	var _requestAnimationFrame = __webpack_require__(602);
 	
 	var _requestAnimationFrame2 = _interopRequireDefault(_requestAnimationFrame);
 	
-	var _Actions = __webpack_require__(598);
+	var _Actions = __webpack_require__(603);
 	
-	var _DOMStateStorage = __webpack_require__(599);
+	var _DOMStateStorage = __webpack_require__(604);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -48931,7 +48967,7 @@ require('source-map-support').install({environment: 'node'});
 	module.exports = exports['default'];
 
 /***/ },
-/* 597 */
+/* 602 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48982,7 +49018,7 @@ require('source-map-support').install({environment: 'node'});
 	module.exports = compatRaf;
 
 /***/ },
-/* 598 */
+/* 603 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -49009,7 +49045,7 @@ require('source-map-support').install({environment: 'node'});
 	var POP = exports.POP = 'POP';
 
 /***/ },
-/* 599 */
+/* 604 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49099,7 +49135,7 @@ require('source-map-support').install({environment: 'node'});
 	};
 
 /***/ },
-/* 600 */
+/* 605 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49113,7 +49149,7 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _isBrowser2 = _interopRequireDefault(_isBrowser);
 	
-	__webpack_require__(601);
+	__webpack_require__(606);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -49178,7 +49214,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 601 */
+/* 606 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49405,7 +49441,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 602 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49419,11 +49455,11 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _isBrowser2 = _interopRequireDefault(_isBrowser);
 	
-	var _onRouterUpdate = __webpack_require__(603);
+	var _onRouterUpdate = __webpack_require__(608);
 	
 	var _onRouterUpdate2 = _interopRequireDefault(_onRouterUpdate);
 	
-	var _ga = __webpack_require__(604);
+	var _ga = __webpack_require__(609);
 	
 	var _ga2 = _interopRequireDefault(_ga);
 	
@@ -49451,7 +49487,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 603 */
+/* 608 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49497,7 +49533,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 604 */
+/* 609 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49524,7 +49560,7 @@ require('source-map-support').install({environment: 'node'});
 	};
 
 /***/ },
-/* 605 */
+/* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49572,6 +49608,55 @@ require('source-map-support').install({environment: 'node'});
 	var hostname = process.env.WP_HOST || "localhost";
 	var port = process.env.WP_PORT || 8079;
 	var static_path = 'http://' + hostname + ':' + port;
+
+/***/ },
+/* 611 */
+/***/ function(module, exports) {
+
+	module.exports = require("mongoose");
+
+/***/ },
+/* 612 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";var mongoose=__webpack_require__(611);var Group=__webpack_require__(613);var _=__webpack_require__(614);var router=__webpack_require__(3).Router();router.route("/groups/:id?").get(getGroups).post(addGroup).delete(deleteGroup);function getGroups(req,res){Group.find(function(err,groups){if(err)res.send(err);else res.json(groups);});}function addGroup(req,res){var group=new Group(_.extend({},req.body));group.save(function(err){if(err)res.send(err);else res.json(group);});}function deleteGroup(req,res){var id=req.params.id;Group.remove({_id:id},function(err,removed){if(err)res.send(err);else res.json(removed);});}module.exports=router;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(router,"router","/Users/wangyansheng/Documents/code/wensu/src/contollers/groupsController.js");__REACT_HOT_LOADER__.register(getGroups,"getGroups","/Users/wangyansheng/Documents/code/wensu/src/contollers/groupsController.js");__REACT_HOT_LOADER__.register(addGroup,"addGroup","/Users/wangyansheng/Documents/code/wensu/src/contollers/groupsController.js");__REACT_HOT_LOADER__.register(deleteGroup,"deleteGroup","/Users/wangyansheng/Documents/code/wensu/src/contollers/groupsController.js");}();;
+
+/***/ },
+/* 613 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';var _mongoose=__webpack_require__(611);var _mongoose2=_interopRequireDefault(_mongoose);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// Create a new schema for our tweet data
+	var schema=new _mongoose2.default.Schema({group:String,unit:String});// // Create a static getTweets method to return tweet data from the db
+	// schema.statics.getTweets = function(page, skip, callback) {
+	//
+	//   var tweets = [],
+	//       start = (page * 10) + (skip * 1);
+	//
+	//   // Query the db, using skip and limit to achieve page chunks
+	//   Tweet.find({},'twid active author avatar body date screenname',{skip: start, limit: 10}).sort({date: 'desc'}).exec(function(err,docs){
+	//
+	//     // If everything is cool...
+	//     if(!err) {
+	//       tweets = docs;  // We got tweets
+	//       tweets.forEach(function(tweet){
+	//         tweet.active = true; // Set them to active
+	//       });
+	//     }
+	//
+	//     // Pass them back to the specified callback
+	//     callback(tweets);
+	//
+	//   });
+	//
+	// };
+	// Return a Tweet model based upon the defined schema
+	module.exports=_mongoose2.default.model('groups',schema);;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(schema,'schema','/Users/wangyansheng/Documents/code/wensu/src/models/groups.js');}();;
+
+/***/ },
+/* 614 */
+/***/ function(module, exports) {
+
+	module.exports = require("underscore");
 
 /***/ }
 /******/ ]);

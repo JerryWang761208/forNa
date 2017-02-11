@@ -1,29 +1,47 @@
 import React from 'react';
-import { 
-	Button, 
-	Form, 
+import {
+	Button,
+	Form,
 	FormGroup,
-	InputGroup, 
-	FormControl, 
-	ControlLabel, 
-	Icon, 
-	Col, 
-	Label, 
-	Popover, 
-	Grid, 
-	Row, 
+	InputGroup,
+	FormControl,
+	ControlLabel,
+	Icon,
+	Col,
+	Label,
+	Popover,
+	Grid,
+	Row,
 	Table,
 	Checkbox,
-	Radio 
+	Radio
 } from '@sketchpixy/rubix';
 
-
+import GroupService from '../services/groupService';
 	//設定欄 放欄位篩選 例如：乾坤 大組 單位
 
 export default class Home extends React.Component {
+	constructor() {
+	  super();
+	  this.search = this.search.bind(this);
+		this.state = {
+			sex:'male',
+			groups:[]
+		}
+ }
+
+	componentDidMount() {
+		GroupService.getGroups().then((res)=>{
+			console.log(res);
+			this.setState({
+				groups: res
+			})
+		});
+  }
+
 
 	search() {
-		console.log(this);
+		console.log('search');
 	}
 
   render() {
@@ -32,7 +50,7 @@ export default class Home extends React.Component {
     // );
     return (
 			<Grid>
-			
+
 				<Row className="show-grid">
 					<Col xs={12}>
 						<Row className="show-grid">
@@ -40,13 +58,13 @@ export default class Home extends React.Component {
 								<FormGroup>
 									<ControlLabel>乾坤</ControlLabel>
 									<div>
-										<Radio inline defaultValue='option1' defaultChecked name='inline-radio-options'>
+										<Radio inline defaultValue='male' defaultChecked name='inline-radio-options'>
 											乾道
 										</Radio>
-										<Radio inline defaultValue='option2'  name='inline-radio-options'>
+										<Radio inline defaultValue='female'  name='inline-radio-options'>
 											坤道
 										</Radio>
-										
+
 									</div>
 								</FormGroup>
 							</Col>
@@ -55,12 +73,12 @@ export default class Home extends React.Component {
 								<FormGroup controlId="dropdownselect">
 									<ControlLabel>大組</ControlLabel>
 									<FormControl componentClass="select" placeholder="select">
-										<option value='1'>第一組</option>
-										<option value='2'>第二組</option>
-										<option value='3'>第三組</option>
-										<option value='4'>第四組</option>
-										<option value='5'>第五組</option>
-										<option value='5'>第六組</option>
+										<option value='第一組'>第一組</option>
+										<option value='第二組'>第二組</option>
+										<option value='第三組'>第三組</option>
+										<option value='第四組'>第四組</option>
+										<option value='第五組'>第五組</option>
+										<option value='第六組'>第六組</option>
 									</FormControl>
 								</FormGroup>
 							</Col>
@@ -69,19 +87,22 @@ export default class Home extends React.Component {
 								<FormGroup controlId="dropdownselect">
 									<ControlLabel>單位</ControlLabel>
 									<FormControl componentClass="select" placeholder="select">
-										<option value='1'>中邱</option>
-										<option value='2'>第二組</option>
-										<option value='3'>第三組</option>
-										<option value='4'>第四組</option>
-										<option value='5'>第五組</option>
-										<option value='5'>第六組</option>
+										{
+											this.state.groups.map((group)=>{
+
+												return (
+													<option key={group._id}>{group.unit}</option>
+												);
+											})
+										}
+
 									</FormControl>
 								</FormGroup>
 							</Col>
 						</Row>
-						
 
-						
+
+
 					</Col>
 				</Row>
 
@@ -91,9 +112,9 @@ export default class Home extends React.Component {
 						<FormGroup controlId='searchbtnicon'>
 							<Col sm={12}>
 								<InputGroup>
-									<FormControl type='text' placeholder='請輸入關鍵字 ...' onChange={this.search.bind(this)}/>
+									<FormControl type='text' placeholder='請輸入關鍵字 ...' onChange={this.search}/>
 									<InputGroup.Addon className='plain'>
-										<Button onClick={this.search.bind(this)}>
+										<Button onClick={this.search}>
 											<span>搜尋 </span>
 											<Icon bundle='fontello' glyph='search' />
 										</Button>
@@ -101,7 +122,7 @@ export default class Home extends React.Component {
 								</InputGroup>
 							</Col>
 						</FormGroup>
-						
+
 
 						<Table striped bordered condensed hover>
 							<thead>
@@ -139,5 +160,3 @@ export default class Home extends React.Component {
 		);
   }
 }
-
-
