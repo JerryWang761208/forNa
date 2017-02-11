@@ -6,7 +6,7 @@ var router = require("express").Router();
 router.route("/groups/:id?").get(getGroups).post(addGroup).delete(deleteGroup);
 
 function getGroups(req, res) {
-    Group.find({},function (err, groups) {
+    Group.find(function (err, groups) {
         if (err)
             res.send(err);
         else

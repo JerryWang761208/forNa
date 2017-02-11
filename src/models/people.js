@@ -1,9 +1,14 @@
 import mongoose from 'mongoose';
+
+// import Groups from './groups';
 // Create a new schema for our tweet data
-var schema = new mongoose.Schema({
-  group   :String
-  ,unit   :String
-},{collection:'groups'});
+var peopleSchema = new mongoose.Schema({
+
+  name:String,
+  sex:String,
+  group:Object //{group,unit}
+
+},{collection:'people'});
 
 // // Create a static getTweets method to return tweet data from the db
 // schema.statics.getTweets = function(page, skip, callback) {
@@ -30,4 +35,4 @@ var schema = new mongoose.Schema({
 // };
 
 // Return a Tweet model based upon the defined schema
-module.exports = mongoose.model('groups', schema);
+module.exports = mongoose.model('people', peopleSchema);

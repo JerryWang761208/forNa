@@ -2,7 +2,7 @@ import path from 'path';
 import express from 'express';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-
+import bodyParser from 'body-parser';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
@@ -13,8 +13,8 @@ import RubixAssetMiddleware from '@sketchpixy/rubix/lib/node/RubixAssetMiddlewar
 import mongoose from 'mongoose';
 
 //controllers
-import groupController from './src/contollers/groupsController';
-
+import groupController from './src/controllers/groupsController';
+import peopleController from './src/controllers/peopleController';
 
 const port = process.env.PORT || 9090;
 
@@ -22,8 +22,10 @@ const port = process.env.PORT || 9090;
 let app = express();
 app.use(compression());
 app.use(cookieParser());
+app.use(bodyParser.json())
 app.use(express.static(path.join(process.cwd(), 'public')));
 app.use("/api", groupController);
+app.use("/api", peopleController);
 app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'pug');
 

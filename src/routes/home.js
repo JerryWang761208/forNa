@@ -18,6 +18,7 @@ import {
 } from '@sketchpixy/rubix';
 
 import GroupService from '../services/groupService';
+import PeopleService from '../services/personService';
 	//設定欄 放欄位篩選 例如：乾坤 大組 單位
 
 export default class Home extends React.Component {
@@ -36,6 +37,12 @@ export default class Home extends React.Component {
 			this.setState({
 				groups: res
 			})
+		});
+
+		PeopleService.findPerson({name:'王'}).then((res)=>{
+			console.log('people:',res);
+		},(error)=>{
+			console.log(error);
 		});
   }
 
