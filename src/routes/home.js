@@ -31,7 +31,8 @@ export default class Home extends React.Component {
 		this.state = {
 			sex:'male',
 			groups:[],
-			searchGroups:[]
+			searchGroups:[],
+			checkinPeople:[]
 		}
  }
 
@@ -42,10 +43,19 @@ export default class Home extends React.Component {
 				groups: res
 			})
 		});
+		this.updateCheckin();
 
 
   }
 
+	updateCheckin(){
+		CheckinService.getCheckins().then((res)=>{
+			console.log('updateCheckins:',res);
+			this.setState({
+				checkinPeople: res
+			})
+		});
+	}
 
 //搜尋
 	search(e) {
@@ -66,7 +76,8 @@ export default class Home extends React.Component {
 	checkinPerson(person){
 		console.log(person);
 		CheckinService.addCheckin({person:person}).then((res)=>{
-			console.log('checkin:',res)
+			console.log('checkinPerson:',res)
+			this.updateCheckin();
 		});
 	}
 
@@ -181,7 +192,30 @@ export default class Home extends React.Component {
 							</tbody>
 							</Table>
 					</Col>
-	  			<Col xs={6} md={4}><code>&lt;{'Col xs={6} md={4}'} /&gt;</code></Col>
+	  			<Col xs={6} md={4}>
+						<Table striped bordered condensed hover>
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>姓名</th>
+								</tr>
+							</thead>
+							<tbody className="search-tbody">
+								{
+									this.state.checkinPeople.map((person)=>{
+										return (
+											<tr key={person._id}>
+
+												<td style={{textAlign:'center'}}>{person.order}</td>
+												<td>{person.person.name}</td>
+
+											</tr>
+										);
+									})
+								}
+							</tbody>
+							</Table>
+	  			</Col>
 				</Row>
 			</Grid>
 		);

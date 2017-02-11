@@ -6,7 +6,7 @@ var router = require("express").Router();
 router.route("/checkins/:id?").get(getCheckins).post(addCheckin).delete(deleteCheckin);
 
 function getCheckins(req, res) {
-    Group.find(function (err, groups) {
+    Checkin.find(function (err, groups) {
         if (err)
             res.send(err);
         else
