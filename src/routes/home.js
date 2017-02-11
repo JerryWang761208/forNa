@@ -27,7 +27,8 @@ export default class Home extends React.Component {
 	  this.search = this.search.bind(this);
 		this.state = {
 			sex:'male',
-			groups:[]
+			groups:[],
+			searchGroups:[]
 		}
  }
 
@@ -39,16 +40,22 @@ export default class Home extends React.Component {
 			})
 		});
 
-		PeopleService.findPerson({name:'王'}).then((res)=>{
-			console.log('people:',res);
-		},(error)=>{
-			console.log(error);
-		});
+
   }
 
 
-	search() {
+	search(e) {
 		console.log('search');
+		let search = e.target.value;
+		PeopleService.findPerson({name:search}).then((res)=>{
+			console.log('people:',res);
+			this.setState({
+				searchGroups:res
+			});
+		},(error)=>{
+			console.log(error);
+		});
+
 	}
 
   render() {
@@ -134,30 +141,31 @@ export default class Home extends React.Component {
 						<Table striped bordered condensed hover>
 							<thead>
 								<tr>
-								<th>#</th>
+
 								<th>姓名</th>
 								<th>大組</th>
 								<th>單位</th>
+								<th>#</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-								<td>1</td>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								</tr>
-								<tr>
-								<td>2</td>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-								</tr>
-								<tr>
-								<td>3</td>
-								<td colSpan="2">Larry the Bird</td>
-								<td>@twitter</td>
-								</tr>
+							<tbody className="search-tbody">
+								{
+									this.state.searchGroups.map((person)=>{
+										return (
+											<tr key={person._id}>
+
+												<td>{person.name}</td>
+												<td>{person.group.group}</td>
+												<td>{person.group.unit}</td>
+												<td style={{textAlign:'center'}}>
+													<Button bsStyle='green' rounded >
+	  												<Icon glyph='icon-fontello-plus-3'/>
+													</Button>
+												</td>
+											</tr>
+										);
+									})
+								}
 							</tbody>
 							</Table>
 					</Col>
