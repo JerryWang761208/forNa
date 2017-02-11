@@ -27,7 +27,7 @@ export default class Home extends React.Component {
 	  super();
 	  this.search = this.search.bind(this);
 	  this.checkinPerson = this.checkinPerson.bind(this);
-
+		this.updateCheckin = this.updateCheckin.bind(this);
 		this.state = {
 			sex:'male',
 			groups:[],
@@ -45,15 +45,22 @@ export default class Home extends React.Component {
 		});
 		this.updateCheckin();
 
-
   }
 
 	updateCheckin(){
 		CheckinService.getCheckins().then((res)=>{
-			console.log('updateCheckins:',res);
-			this.setState({
-				checkinPeople: res
-			})
+			console.log('updateCheckin::::',res);
+			if(res){
+				console.log('get');
+				this.setState({
+					checkinPeople: res
+				})
+			}else{
+				this.setState({
+					checkinPeople: []
+				})
+			}
+
 		});
 	}
 
@@ -62,7 +69,7 @@ export default class Home extends React.Component {
 		console.log('search');
 		let search = e.target.value;
 		PeopleService.findPerson({name:search}).then((res)=>{
-			console.log('people:',res);
+			console.log('searchPeople:',res);
 			this.setState({
 				searchGroups:res
 			});
@@ -74,11 +81,41 @@ export default class Home extends React.Component {
 
 	//checkin
 	checkinPerson(person){
-		console.log(person);
-		CheckinService.addCheckin({person:person}).then((res)=>{
-			console.log('checkinPerson:',res)
-			this.updateCheckin();
-		});
+
+		//獲得最大order
+		CheckinService.getMaxCheckin().then((res)=>{
+			// console.log('maxCheckin:',res.order);
+			console.log('tstestst');
+			if(res){
+				let maxOrder = res.order;
+
+					console.log('maxOrder:',maxOrder);
+					CheckinService.addCheckin({
+
+						order:maxOrder+1,
+						person:person
+					})
+					.then((res)=>{
+						console.log('checkinPerson:',res)
+						this.updateCheckin();
+					});
+
+			}else{//都沒人時候
+
+				CheckinService.addCheckin({
+					order:1,
+					person:person,
+				})
+				.then((res)=>{
+					console.log('checkinPerson:',res)
+					this.updateCheckin();
+				});
+			}
+
+
+
+		},(error)=>{console.log('test',error)});
+
 	}
 
   render() {
@@ -171,12 +208,12 @@ export default class Home extends React.Component {
 								<th>#</th>
 								</tr>
 							</thead>
-							<tbody className="search-tbody">
+							<tbody >
 								{
 									this.state.searchGroups.map((person)=>{
 										return (
-											<tr key={person._id}>
 
+											<tr key={person._id}>
 												<td>{person.name}</td>
 												<td>{person.group.group}</td>
 												<td>{person.group.unit}</td>
@@ -200,7 +237,7 @@ export default class Home extends React.Component {
 									<th>姓名</th>
 								</tr>
 							</thead>
-							<tbody className="search-tbody">
+							<tbody >
 								{
 									this.state.checkinPeople.map((person)=>{
 										return (

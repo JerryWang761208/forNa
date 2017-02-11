@@ -54,7 +54,7 @@ require('source-map-support').install({environment: 'node'});
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _path=__webpack_require__(2);var _path2=_interopRequireDefault(_path);var _express=__webpack_require__(3);var _express2=_interopRequireDefault(_express);var _compression=__webpack_require__(4);var _compression2=_interopRequireDefault(_compression);var _cookieParser=__webpack_require__(5);var _cookieParser2=_interopRequireDefault(_cookieParser);var _bodyParser=__webpack_require__(6);var _bodyParser2=_interopRequireDefault(_bodyParser);var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _server=__webpack_require__(8);var _server2=_interopRequireDefault(_server);var _routes=__webpack_require__(177);var _routes2=_interopRequireDefault(_routes);var _router=__webpack_require__(599);var _RubixAssetMiddleware=__webpack_require__(612);var _RubixAssetMiddleware2=_interopRequireDefault(_RubixAssetMiddleware);var _mongoose=__webpack_require__(613);var _mongoose2=_interopRequireDefault(_mongoose);var _groupsController=__webpack_require__(614);var _groupsController2=_interopRequireDefault(_groupsController);var _peopleController=__webpack_require__(617);var _peopleController2=_interopRequireDefault(_peopleController);var _checkinController=__webpack_require__(619);var _checkinController2=_interopRequireDefault(_checkinController);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var port=process.env.PORT||9090;// import autoIncrement from 'mongoose-auto-increment';
+	'use strict';var _path=__webpack_require__(2);var _path2=_interopRequireDefault(_path);var _express=__webpack_require__(3);var _express2=_interopRequireDefault(_express);var _compression=__webpack_require__(4);var _compression2=_interopRequireDefault(_compression);var _cookieParser=__webpack_require__(5);var _cookieParser2=_interopRequireDefault(_cookieParser);var _bodyParser=__webpack_require__(6);var _bodyParser2=_interopRequireDefault(_bodyParser);var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _server=__webpack_require__(8);var _server2=_interopRequireDefault(_server);var _routes=__webpack_require__(177);var _routes2=_interopRequireDefault(_routes);var _router=__webpack_require__(600);var _RubixAssetMiddleware=__webpack_require__(613);var _RubixAssetMiddleware2=_interopRequireDefault(_RubixAssetMiddleware);var _mongoose=__webpack_require__(614);var _mongoose2=_interopRequireDefault(_mongoose);var _groupsController=__webpack_require__(615);var _groupsController2=_interopRequireDefault(_groupsController);var _peopleController=__webpack_require__(618);var _peopleController2=_interopRequireDefault(_peopleController);var _checkinController=__webpack_require__(620);var _checkinController2=_interopRequireDefault(_checkinController);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var port=process.env.PORT||9090;// import autoIncrement from 'mongoose-auto-increment';
 	//controllers
 	var app=(0,_express2.default)();app.use((0,_compression2.default)());app.use((0,_cookieParser2.default)());app.use(_bodyParser2.default.json());app.use(_express2.default.static(_path2.default.join(process.cwd(),'public')));app.use("/api",_groupsController2.default);app.use("/api",_peopleController2.default);app.use("/api",_checkinController2.default);app.set('views',_path2.default.join(process.cwd(),'views'));app.set('view engine','pug');function renderHTML(req,res){(0,_router.renderHTMLString)(_routes2.default,req,function(error,redirectLocation,html){if(error){if(error.message==='Not found'){res.status(404).send(error.message);}else{res.status(500).send(error.message);}}else if(redirectLocation){res.redirect(302,redirectLocation.pathname+redirectLocation.search);}else{res.render('index',{content:html});}});}app.get('*',(0,_RubixAssetMiddleware2.default)('ltr'),function(req,res,next){renderHTML(req,res);});app.listen(port,function(){console.log('Node.js app is running at http://localhost:'+port+'/');});// Connect to our mongo database
 	_mongoose2.default.connect('mongodb://localhost:27017/wensu');var db=_mongoose2.default.connection;db.on('error',console.error.bind(console,'connection error:'));db.once('open',function callback(){console.log("Database Connected.");});;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(port,'port','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(app,'app','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(renderHTML,'renderHTML','/Users/wangyansheng/Documents/code/wensu/server.babel.js');__REACT_HOT_LOADER__.register(db,'db','/Users/wangyansheng/Documents/code/wensu/server.babel.js');}();;
@@ -20263,7 +20263,7 @@ require('source-map-support').install({environment: 'node'});
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';exports.__esModule=true;var _classCallCheck2=__webpack_require__(178);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(179);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(248);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(256);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(257);var _rubix=__webpack_require__(258);var _footer=__webpack_require__(588);var _footer2=_interopRequireDefault(_footer);var _header=__webpack_require__(589);var _header2=_interopRequireDefault(_header);var _sidebar=__webpack_require__(590);var _sidebar2=_interopRequireDefault(_sidebar);var _home=__webpack_require__(591);var _home2=_interopRequireDefault(_home);var _Login=__webpack_require__(598);var _Login2=_interopRequireDefault(_Login);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}/* Pages */var App=function(_React$Component){(0,_inherits3.default)(App,_React$Component);function App(){(0,_classCallCheck3.default)(this,App);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}App.prototype.render=function render(){return _react2.default.createElement(_rubix.MainContainer,this.props,_react2.default.createElement(_sidebar2.default,null),_react2.default.createElement(_header2.default,null),_react2.default.createElement('div',{id:'body'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:12},this.props.children)))),_react2.default.createElement(_footer2.default,null));};return App;}(_react2.default.Component);/* Common Components */var _default=_react2.default.createElement(_reactRouter.Route,{path:'/',component:App},_react2.default.createElement(_reactRouter.IndexRoute,{component:_home2.default}),_react2.default.createElement(_reactRouter.Route,{path:'login',component:_Login2.default}));exports.default=_default;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(App,'App','/Users/wangyansheng/Documents/code/wensu/src/routes.js');__REACT_HOT_LOADER__.register(_default,'default','/Users/wangyansheng/Documents/code/wensu/src/routes.js');}();;
+	'use strict';exports.__esModule=true;var _classCallCheck2=__webpack_require__(178);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(179);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(248);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(256);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(257);var _rubix=__webpack_require__(258);var _footer=__webpack_require__(588);var _footer2=_interopRequireDefault(_footer);var _header=__webpack_require__(589);var _header2=_interopRequireDefault(_header);var _sidebar=__webpack_require__(590);var _sidebar2=_interopRequireDefault(_sidebar);var _home=__webpack_require__(591);var _home2=_interopRequireDefault(_home);var _Login=__webpack_require__(599);var _Login2=_interopRequireDefault(_Login);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}/* Pages */var App=function(_React$Component){(0,_inherits3.default)(App,_React$Component);function App(){(0,_classCallCheck3.default)(this,App);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}App.prototype.render=function render(){return _react2.default.createElement(_rubix.MainContainer,this.props,_react2.default.createElement(_sidebar2.default,null),_react2.default.createElement(_header2.default,null),_react2.default.createElement('div',{id:'body'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:12},this.props.children)))),_react2.default.createElement(_footer2.default,null));};return App;}(_react2.default.Component);/* Common Components */var _default=_react2.default.createElement(_reactRouter.Route,{path:'/',component:App},_react2.default.createElement(_reactRouter.IndexRoute,{component:_home2.default}),_react2.default.createElement(_reactRouter.Route,{path:'login',component:_Login2.default}));exports.default=_default;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(App,'App','/Users/wangyansheng/Documents/code/wensu/src/routes.js');__REACT_HOT_LOADER__.register(_default,'default','/Users/wangyansheng/Documents/code/wensu/src/routes.js');}();;
 
 /***/ },
 /* 178 */
@@ -48445,13 +48445,16 @@ require('source-map-support').install({environment: 'node'});
 /* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(178);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(179);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(248);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _rubix=__webpack_require__(258);var _groupService=__webpack_require__(592);var _groupService2=_interopRequireDefault(_groupService);var _personService=__webpack_require__(597);var _personService2=_interopRequireDefault(_personService);var _checkinService=__webpack_require__(622);var _checkinService2=_interopRequireDefault(_checkinService);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}//設定欄 放欄位篩選 例如：乾坤 大組 單位
-	var Home=function(_React$Component){(0,_inherits3.default)(Home,_React$Component);function Home(){(0,_classCallCheck3.default)(this,Home);var _this=(0,_possibleConstructorReturn3.default)(this,_React$Component.call(this));_this.search=_this.search.bind(_this);_this.checkinPerson=_this.checkinPerson.bind(_this);_this.state={sex:'male',groups:[],searchGroups:[],checkinPeople:[]};return _this;}Home.prototype.componentDidMount=function componentDidMount(){var _this2=this;_groupService2.default.getGroups().then(function(res){console.log(res);_this2.setState({groups:res});});this.updateCheckin();};Home.prototype.updateCheckin=function updateCheckin(){var _this3=this;_checkinService2.default.getCheckins().then(function(res){console.log('updateCheckins:',res);_this3.setState({checkinPeople:res});});};//搜尋
-	Home.prototype.search=function search(e){var _this4=this;console.log('search');var search=e.target.value;_personService2.default.findPerson({name:search}).then(function(res){console.log('people:',res);_this4.setState({searchGroups:res});},function(error){console.log(error);});};//checkin
-	Home.prototype.checkinPerson=function checkinPerson(person){var _this5=this;console.log(person);_checkinService2.default.addCheckin({person:person}).then(function(res){console.log('checkinPerson:',res);_this5.updateCheckin();});};Home.prototype.render=function render(){var _this6=this;// return (
+	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(178);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(179);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(248);var _inherits3=_interopRequireDefault(_inherits2);var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _rubix=__webpack_require__(258);var _groupService=__webpack_require__(592);var _groupService2=_interopRequireDefault(_groupService);var _personService=__webpack_require__(597);var _personService2=_interopRequireDefault(_personService);var _checkinService=__webpack_require__(598);var _checkinService2=_interopRequireDefault(_checkinService);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}//設定欄 放欄位篩選 例如：乾坤 大組 單位
+	var Home=function(_React$Component){(0,_inherits3.default)(Home,_React$Component);function Home(){(0,_classCallCheck3.default)(this,Home);var _this=(0,_possibleConstructorReturn3.default)(this,_React$Component.call(this));_this.search=_this.search.bind(_this);_this.checkinPerson=_this.checkinPerson.bind(_this);_this.updateCheckin=_this.updateCheckin.bind(_this);_this.state={sex:'male',groups:[],searchGroups:[],checkinPeople:[]};return _this;}Home.prototype.componentDidMount=function componentDidMount(){var _this2=this;_groupService2.default.getGroups().then(function(res){console.log(res);_this2.setState({groups:res});});this.updateCheckin();};Home.prototype.updateCheckin=function updateCheckin(){var _this3=this;_checkinService2.default.getCheckins().then(function(res){console.log('updateCheckin::::',res);if(res){console.log('get');_this3.setState({checkinPeople:res});}else{_this3.setState({checkinPeople:[]});}});};//搜尋
+	Home.prototype.search=function search(e){var _this4=this;console.log('search');var search=e.target.value;_personService2.default.findPerson({name:search}).then(function(res){console.log('searchPeople:',res);_this4.setState({searchGroups:res});},function(error){console.log(error);});};//checkin
+	Home.prototype.checkinPerson=function checkinPerson(person){var _this5=this;//獲得最大order
+	_checkinService2.default.getMaxCheckin().then(function(res){// console.log('maxCheckin:',res.order);
+	console.log('tstestst');if(res){var maxOrder=res.order;console.log('maxOrder:',maxOrder);_checkinService2.default.addCheckin({order:maxOrder+1,person:person}).then(function(res){console.log('checkinPerson:',res);_this5.updateCheckin();});}else{//都沒人時候
+	_checkinService2.default.addCheckin({order:1,person:person}).then(function(res){console.log('checkinPerson:',res);_this5.updateCheckin();});}},function(error){console.log('test',error);});};Home.prototype.render=function render(){var _this6=this;// return (
 	//   // <div>Hello World!</div>
 	// );
-	return _react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12},_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.ControlLabel,null,'\u4E7E\u5764'),_react2.default.createElement('div',null,_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'male',defaultChecked:true,name:'inline-radio-options'},'\u4E7E\u9053'),_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'female',name:'inline-radio-options'},'\u5764\u9053')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u5927\u7D44'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},_react2.default.createElement('option',{value:'\u7B2C\u4E00\u7D44'},'\u7B2C\u4E00\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E8C\u7D44'},'\u7B2C\u4E8C\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E09\u7D44'},'\u7B2C\u4E09\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u56DB\u7D44'},'\u7B2C\u56DB\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E94\u7D44'},'\u7B2C\u4E94\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u516D\u7D44'},'\u7B2C\u516D\u7D44')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u55AE\u4F4D'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},this.state.groups.map(function(group){return _react2.default.createElement('option',{key:group._id},group.unit);}))))))),_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12,md:8},_react2.default.createElement(_rubix.FormGroup,{controlId:'searchbtnicon'},_react2.default.createElement(_rubix.Col,{sm:12},_react2.default.createElement(_rubix.InputGroup,null,_react2.default.createElement(_rubix.FormControl,{type:'text',placeholder:'\u8ACB\u8F38\u5165\u95DC\u9375\u5B57 ...',onChange:this.search}),_react2.default.createElement(_rubix.InputGroup.Addon,{className:'plain'},_react2.default.createElement(_rubix.Button,{onClick:this.search},_react2.default.createElement('span',null,'\u641C\u5C0B '),_react2.default.createElement(_rubix.Icon,{bundle:'fontello',glyph:'search'})))))),_react2.default.createElement(_rubix.Table,{striped:true,bordered:true,condensed:true,hover:true},_react2.default.createElement('thead',null,_react2.default.createElement('tr',null,_react2.default.createElement('th',null,'\u59D3\u540D'),_react2.default.createElement('th',null,'\u5927\u7D44'),_react2.default.createElement('th',null,'\u55AE\u4F4D'),_react2.default.createElement('th',null,'#'))),_react2.default.createElement('tbody',{className:'search-tbody'},this.state.searchGroups.map(function(person){return _react2.default.createElement('tr',{key:person._id},_react2.default.createElement('td',null,person.name),_react2.default.createElement('td',null,person.group.group),_react2.default.createElement('td',null,person.group.unit),_react2.default.createElement('td',{style:{textAlign:'center'}},_react2.default.createElement(_rubix.Button,{bsStyle:'green',rounded:true,onClick:function onClick(){return _this6.checkinPerson(person);}},_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-plus-3'}))));})))),_react2.default.createElement(_rubix.Col,{xs:6,md:4},_react2.default.createElement(_rubix.Table,{striped:true,bordered:true,condensed:true,hover:true},_react2.default.createElement('thead',null,_react2.default.createElement('tr',null,_react2.default.createElement('th',null,'#'),_react2.default.createElement('th',null,'\u59D3\u540D'))),_react2.default.createElement('tbody',{className:'search-tbody'},this.state.checkinPeople.map(function(person){return _react2.default.createElement('tr',{key:person._id},_react2.default.createElement('td',{style:{textAlign:'center'}},person.order),_react2.default.createElement('td',null,person.person.name));}))))));};return Home;}(_react2.default.Component);exports.default=Home;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Home,'Home','/Users/wangyansheng/Documents/code/wensu/src/routes/home.js');}();;
+	return _react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12},_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.ControlLabel,null,'\u4E7E\u5764'),_react2.default.createElement('div',null,_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'male',defaultChecked:true,name:'inline-radio-options'},'\u4E7E\u9053'),_react2.default.createElement(_rubix.Radio,{inline:true,defaultValue:'female',name:'inline-radio-options'},'\u5764\u9053')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u5927\u7D44'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},_react2.default.createElement('option',{value:'\u7B2C\u4E00\u7D44'},'\u7B2C\u4E00\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E8C\u7D44'},'\u7B2C\u4E8C\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E09\u7D44'},'\u7B2C\u4E09\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u56DB\u7D44'},'\u7B2C\u56DB\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u4E94\u7D44'},'\u7B2C\u4E94\u7D44'),_react2.default.createElement('option',{value:'\u7B2C\u516D\u7D44'},'\u7B2C\u516D\u7D44')))),_react2.default.createElement(_rubix.Col,{xs:3},_react2.default.createElement(_rubix.FormGroup,{controlId:'dropdownselect'},_react2.default.createElement(_rubix.ControlLabel,null,'\u55AE\u4F4D'),_react2.default.createElement(_rubix.FormControl,{componentClass:'select',placeholder:'select'},this.state.groups.map(function(group){return _react2.default.createElement('option',{key:group._id},group.unit);}))))))),_react2.default.createElement(_rubix.Row,{className:'show-grid'},_react2.default.createElement(_rubix.Col,{xs:12,md:8},_react2.default.createElement(_rubix.FormGroup,{controlId:'searchbtnicon'},_react2.default.createElement(_rubix.Col,{sm:12},_react2.default.createElement(_rubix.InputGroup,null,_react2.default.createElement(_rubix.FormControl,{type:'text',placeholder:'\u8ACB\u8F38\u5165\u95DC\u9375\u5B57 ...',onChange:this.search}),_react2.default.createElement(_rubix.InputGroup.Addon,{className:'plain'},_react2.default.createElement(_rubix.Button,{onClick:this.search},_react2.default.createElement('span',null,'\u641C\u5C0B '),_react2.default.createElement(_rubix.Icon,{bundle:'fontello',glyph:'search'})))))),_react2.default.createElement(_rubix.Table,{striped:true,bordered:true,condensed:true,hover:true},_react2.default.createElement('thead',null,_react2.default.createElement('tr',null,_react2.default.createElement('th',null,'\u59D3\u540D'),_react2.default.createElement('th',null,'\u5927\u7D44'),_react2.default.createElement('th',null,'\u55AE\u4F4D'),_react2.default.createElement('th',null,'#'))),_react2.default.createElement('tbody',null,this.state.searchGroups.map(function(person){return _react2.default.createElement('tr',{key:person._id},_react2.default.createElement('td',null,person.name),_react2.default.createElement('td',null,person.group.group),_react2.default.createElement('td',null,person.group.unit),_react2.default.createElement('td',{style:{textAlign:'center'}},_react2.default.createElement(_rubix.Button,{bsStyle:'green',rounded:true,onClick:function onClick(){return _this6.checkinPerson(person);}},_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-plus-3'}))));})))),_react2.default.createElement(_rubix.Col,{xs:6,md:4},_react2.default.createElement(_rubix.Table,{striped:true,bordered:true,condensed:true,hover:true},_react2.default.createElement('thead',null,_react2.default.createElement('tr',null,_react2.default.createElement('th',null,'#'),_react2.default.createElement('th',null,'\u59D3\u540D'))),_react2.default.createElement('tbody',null,this.state.checkinPeople.map(function(person){return _react2.default.createElement('tr',{key:person._id},_react2.default.createElement('td',{style:{textAlign:'center'}},person.order),_react2.default.createElement('td',null,person.person.name));}))))));};return Home;}(_react2.default.Component);exports.default=Home;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Home,'Home','/Users/wangyansheng/Documents/code/wensu/src/routes/home.js');}();;
 
 /***/ },
 /* 592 */
@@ -48497,10 +48500,16 @@ require('source-map-support').install({environment: 'node'});
 /* 598 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(178);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(179);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(248);var _inherits3=_interopRequireDefault(_inherits2);var _class;var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(256);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(257);var _rubix=__webpack_require__(258);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var Login=(0,_reactRouter.withRouter)(_class=function(_React$Component){(0,_inherits3.default)(Login,_React$Component);function Login(){(0,_classCallCheck3.default)(this,Login);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}Login.prototype.back=function back(e){e.preventDefault();e.stopPropagation();this.props.router.goBack();};Login.prototype.componentDidMount=function componentDidMount(){$('html').addClass('authentication');};Login.prototype.componentWillUnmount=function componentWillUnmount(){$('html').removeClass('authentication');};Login.prototype.getPath=function getPath(path){var dir=this.props.location.pathname.search('rtl')!==-1?'rtl':'ltr';path='/'+dir+'/'+path;return path;};Login.prototype.render=function render(){return _react2.default.createElement('div',{id:'auth-container',className:'login'},_react2.default.createElement('div',{id:'auth-row'},_react2.default.createElement('div',{id:'auth-cell'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{sm:4,smOffset:4,xs:10,xsOffset:1,collapseLeft:true,collapseRight:true},_react2.default.createElement(_rubix.PanelContainer,{controls:false},_react2.default.createElement(_rubix.Panel,null,_react2.default.createElement(_rubix.PanelBody,{style:{padding:0}},_react2.default.createElement('div',{className:'text-center bg-darkblue fg-white'},_react2.default.createElement('h3',{style:{margin:0,padding:25}},'\u767B\u5165\u6587\u66F8\u7CFB\u7D71')),_react2.default.createElement('div',null,_react2.default.createElement('div',{style:{padding:25,paddingTop:0,paddingBottom:0,margin:'auto',marginBottom:25,marginTop:25}},_react2.default.createElement(_rubix.Form,{onSubmit:this.back.bind(this)},_react2.default.createElement(_rubix.FormGroup,{controlId:'emailaddress'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-mail'})),_react2.default.createElement(_rubix.FormControl,{autoFocus:true,type:'email',className:'border-focus-blue',placeholder:'support@sketchpixy.com'}))),_react2.default.createElement(_rubix.FormGroup,{controlId:'password'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-key'})),_react2.default.createElement(_rubix.FormControl,{type:'password',className:'border-focus-blue',placeholder:'password'}))),_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,style:{paddingTop:10}},_react2.default.createElement(_reactRouter.Link,{to:this.getPath.call(this,'signup')},'Create a Rubix account')),_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,className:'text-right'},_react2.default.createElement(_rubix.Button,{outlined:true,lg:true,type:'submit',bsStyle:'blue',onClick:this.back.bind(this)},'\u767B\u5165')))))))))))))))));};return Login;}(_react2.default.Component))||_class;exports.default=Login;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Login,'Login','/Users/wangyansheng/Documents/code/wensu/src/routes/Login.js');}();;
+	"use strict";var _stringify=__webpack_require__(593);var _stringify2=_interopRequireDefault(_stringify);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var $=__webpack_require__(595);var promise=__webpack_require__(596);var resourceUrl="http://localhost:9090/api/checkins";module.exports={addCheckin:function addCheckin(group){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl,data:(0,_stringify2.default)(group),method:"POST",dataType:"json",contentType:"application/json",success:resolve,error:reject});});},getCheckins:function getCheckins(){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl,method:"GET",dataType:"json",success:resolve,error:reject});});},getMaxCheckin:function getMaxCheckin(){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:'http://localhost:9090/api/getMaxCheckin/',method:"GET",dataType:"json",success:resolve,error:reject});});},deleteCheckin:function deleteCheckin(group){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl+"/"+group._id,method:"DELETE",dataType:"json",success:resolve,error:reject});});}};;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(resourceUrl,"resourceUrl","/Users/wangyansheng/Documents/code/wensu/src/services/checkinService.js");}();;
 
 /***/ },
 /* 599 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';exports.__esModule=true;exports.default=undefined;var _classCallCheck2=__webpack_require__(178);var _classCallCheck3=_interopRequireDefault(_classCallCheck2);var _possibleConstructorReturn2=__webpack_require__(179);var _possibleConstructorReturn3=_interopRequireDefault(_possibleConstructorReturn2);var _inherits2=__webpack_require__(248);var _inherits3=_interopRequireDefault(_inherits2);var _class;var _react=__webpack_require__(7);var _react2=_interopRequireDefault(_react);var _classnames=__webpack_require__(256);var _classnames2=_interopRequireDefault(_classnames);var _reactRouter=__webpack_require__(257);var _rubix=__webpack_require__(258);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var Login=(0,_reactRouter.withRouter)(_class=function(_React$Component){(0,_inherits3.default)(Login,_React$Component);function Login(){(0,_classCallCheck3.default)(this,Login);return(0,_possibleConstructorReturn3.default)(this,_React$Component.apply(this,arguments));}Login.prototype.back=function back(e){e.preventDefault();e.stopPropagation();this.props.router.goBack();};Login.prototype.componentDidMount=function componentDidMount(){$('html').addClass('authentication');};Login.prototype.componentWillUnmount=function componentWillUnmount(){$('html').removeClass('authentication');};Login.prototype.getPath=function getPath(path){var dir=this.props.location.pathname.search('rtl')!==-1?'rtl':'ltr';path='/'+dir+'/'+path;return path;};Login.prototype.render=function render(){return _react2.default.createElement('div',{id:'auth-container',className:'login'},_react2.default.createElement('div',{id:'auth-row'},_react2.default.createElement('div',{id:'auth-cell'},_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{sm:4,smOffset:4,xs:10,xsOffset:1,collapseLeft:true,collapseRight:true},_react2.default.createElement(_rubix.PanelContainer,{controls:false},_react2.default.createElement(_rubix.Panel,null,_react2.default.createElement(_rubix.PanelBody,{style:{padding:0}},_react2.default.createElement('div',{className:'text-center bg-darkblue fg-white'},_react2.default.createElement('h3',{style:{margin:0,padding:25}},'\u767B\u5165\u6587\u66F8\u7CFB\u7D71')),_react2.default.createElement('div',null,_react2.default.createElement('div',{style:{padding:25,paddingTop:0,paddingBottom:0,margin:'auto',marginBottom:25,marginTop:25}},_react2.default.createElement(_rubix.Form,{onSubmit:this.back.bind(this)},_react2.default.createElement(_rubix.FormGroup,{controlId:'emailaddress'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-mail'})),_react2.default.createElement(_rubix.FormControl,{autoFocus:true,type:'email',className:'border-focus-blue',placeholder:'support@sketchpixy.com'}))),_react2.default.createElement(_rubix.FormGroup,{controlId:'password'},_react2.default.createElement(_rubix.InputGroup,{bsSize:'large'},_react2.default.createElement(_rubix.InputGroup.Addon,null,_react2.default.createElement(_rubix.Icon,{glyph:'icon-fontello-key'})),_react2.default.createElement(_rubix.FormControl,{type:'password',className:'border-focus-blue',placeholder:'password'}))),_react2.default.createElement(_rubix.FormGroup,null,_react2.default.createElement(_rubix.Grid,null,_react2.default.createElement(_rubix.Row,null,_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,style:{paddingTop:10}},_react2.default.createElement(_reactRouter.Link,{to:this.getPath.call(this,'signup')},'Create a Rubix account')),_react2.default.createElement(_rubix.Col,{xs:6,collapseLeft:true,collapseRight:true,className:'text-right'},_react2.default.createElement(_rubix.Button,{outlined:true,lg:true,type:'submit',bsStyle:'blue',onClick:this.back.bind(this)},'\u767B\u5165')))))))))))))))));};return Login;}(_react2.default.Component))||_class;exports.default=Login;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(Login,'Login','/Users/wangyansheng/Documents/code/wensu/src/routes/Login.js');}();;
+
+/***/ },
+/* 600 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48546,17 +48555,17 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _reactRouter = __webpack_require__(257);
 	
-	var _reactHotLoader = __webpack_require__(600);
+	var _reactHotLoader = __webpack_require__(601);
 	
-	var _reactRouterScroll = __webpack_require__(601);
+	var _reactRouterScroll = __webpack_require__(602);
 	
 	var _reactRouterScroll2 = _interopRequireDefault(_reactRouterScroll);
 	
-	var _onRouterSetup = __webpack_require__(607);
+	var _onRouterSetup = __webpack_require__(608);
 	
 	var _onRouterSetup2 = _interopRequireDefault(_onRouterSetup);
 	
-	var _checkScroll = __webpack_require__(609);
+	var _checkScroll = __webpack_require__(610);
 	
 	var _checkScroll2 = _interopRequireDefault(_checkScroll);
 	
@@ -48642,13 +48651,13 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 600 */
+/* 601 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-hot-loader");
 
 /***/ },
-/* 601 */
+/* 602 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48660,7 +48669,7 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ScrollBehaviorContainer = __webpack_require__(602);
+	var _ScrollBehaviorContainer = __webpack_require__(603);
 	
 	var _ScrollBehaviorContainer2 = _interopRequireDefault(_ScrollBehaviorContainer);
 	
@@ -48683,7 +48692,7 @@ require('source-map-support').install({environment: 'node'});
 	module.exports = exports['default'];
 
 /***/ },
-/* 602 */
+/* 603 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48694,7 +48703,7 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ScrollBehavior = __webpack_require__(603);
+	var _ScrollBehavior = __webpack_require__(604);
 	
 	var _ScrollBehavior2 = _interopRequireDefault(_ScrollBehavior);
 	
@@ -48775,7 +48784,7 @@ require('source-map-support').install({environment: 'node'});
 
 
 /***/ },
-/* 603 */
+/* 604 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48798,13 +48807,13 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _scrollTop2 = _interopRequireDefault(_scrollTop);
 	
-	var _requestAnimationFrame = __webpack_require__(604);
+	var _requestAnimationFrame = __webpack_require__(605);
 	
 	var _requestAnimationFrame2 = _interopRequireDefault(_requestAnimationFrame);
 	
-	var _Actions = __webpack_require__(605);
+	var _Actions = __webpack_require__(606);
 	
-	var _DOMStateStorage = __webpack_require__(606);
+	var _DOMStateStorage = __webpack_require__(607);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -48982,7 +48991,7 @@ require('source-map-support').install({environment: 'node'});
 	module.exports = exports['default'];
 
 /***/ },
-/* 604 */
+/* 605 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49033,7 +49042,7 @@ require('source-map-support').install({environment: 'node'});
 	module.exports = compatRaf;
 
 /***/ },
-/* 605 */
+/* 606 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -49060,7 +49069,7 @@ require('source-map-support').install({environment: 'node'});
 	var POP = exports.POP = 'POP';
 
 /***/ },
-/* 606 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49150,7 +49159,7 @@ require('source-map-support').install({environment: 'node'});
 	};
 
 /***/ },
-/* 607 */
+/* 608 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49164,7 +49173,7 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _isBrowser2 = _interopRequireDefault(_isBrowser);
 	
-	__webpack_require__(608);
+	__webpack_require__(609);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -49229,7 +49238,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 608 */
+/* 609 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49456,7 +49465,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 609 */
+/* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49470,11 +49479,11 @@ require('source-map-support').install({environment: 'node'});
 	
 	var _isBrowser2 = _interopRequireDefault(_isBrowser);
 	
-	var _onRouterUpdate = __webpack_require__(610);
+	var _onRouterUpdate = __webpack_require__(611);
 	
 	var _onRouterUpdate2 = _interopRequireDefault(_onRouterUpdate);
 	
-	var _ga = __webpack_require__(611);
+	var _ga = __webpack_require__(612);
 	
 	var _ga2 = _interopRequireDefault(_ga);
 	
@@ -49502,7 +49511,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 610 */
+/* 611 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49548,7 +49557,7 @@ require('source-map-support').install({environment: 'node'});
 	}
 
 /***/ },
-/* 611 */
+/* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49575,7 +49584,7 @@ require('source-map-support').install({environment: 'node'});
 	};
 
 /***/ },
-/* 612 */
+/* 613 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49625,22 +49634,22 @@ require('source-map-support').install({environment: 'node'});
 	var static_path = 'http://' + hostname + ':' + port;
 
 /***/ },
-/* 613 */
+/* 614 */
 /***/ function(module, exports) {
 
 	module.exports = require("mongoose");
 
 /***/ },
-/* 614 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";var mongoose=__webpack_require__(613);var Group=__webpack_require__(615);var _=__webpack_require__(616);var router=__webpack_require__(3).Router();router.route("/groups/:id?").get(getGroups).post(addGroup).delete(deleteGroup);function getGroups(req,res){Group.find(function(err,groups){if(err)res.send(err);else res.json(groups);});}function addGroup(req,res){var group=new Group(_.extend({},req.body));group.save(function(err){if(err)res.send(err);else res.json(group);});}function deleteGroup(req,res){var id=req.params.id;Group.remove({_id:id},function(err,removed){if(err)res.send(err);else res.json(removed);});}module.exports=router;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(router,"router","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");__REACT_HOT_LOADER__.register(getGroups,"getGroups","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");__REACT_HOT_LOADER__.register(addGroup,"addGroup","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");__REACT_HOT_LOADER__.register(deleteGroup,"deleteGroup","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");}();;
-
-/***/ },
 /* 615 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _mongoose=__webpack_require__(613);var _mongoose2=_interopRequireDefault(_mongoose);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// Create a new schema for our tweet data
+	"use strict";var mongoose=__webpack_require__(614);var Group=__webpack_require__(616);var _=__webpack_require__(617);var router=__webpack_require__(3).Router();router.route("/groups/:id?").get(getGroups).post(addGroup).delete(deleteGroup);function getGroups(req,res){Group.find(function(err,groups){if(err)res.send(err);else res.json(groups);});}function addGroup(req,res){var group=new Group(_.extend({},req.body));group.save(function(err){if(err)res.send(err);else res.json(group);});}function deleteGroup(req,res){var id=req.params.id;Group.remove({_id:id},function(err,removed){if(err)res.send(err);else res.json(removed);});}module.exports=router;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(router,"router","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");__REACT_HOT_LOADER__.register(getGroups,"getGroups","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");__REACT_HOT_LOADER__.register(addGroup,"addGroup","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");__REACT_HOT_LOADER__.register(deleteGroup,"deleteGroup","/Users/wangyansheng/Documents/code/wensu/src/controllers/groupsController.js");}();;
+
+/***/ },
+/* 616 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';var _mongoose=__webpack_require__(614);var _mongoose2=_interopRequireDefault(_mongoose);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// Create a new schema for our tweet data
 	var schema=new _mongoose2.default.Schema({group:String,unit:String},{collection:'groups'});// // Create a static getTweets method to return tweet data from the db
 	// schema.statics.getTweets = function(page, skip, callback) {
 	//
@@ -49668,22 +49677,22 @@ require('source-map-support').install({environment: 'node'});
 	module.exports=_mongoose2.default.model('groups',schema);;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(schema,'schema','/Users/wangyansheng/Documents/code/wensu/src/models/groups.js');}();;
 
 /***/ },
-/* 616 */
+/* 617 */
 /***/ function(module, exports) {
 
 	module.exports = require("underscore");
 
 /***/ },
-/* 617 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";var mongoose=__webpack_require__(613);var People=__webpack_require__(618);var _=__webpack_require__(616);var router=__webpack_require__(3).Router();router.route("/people/:id?").get(getPeople).post(findPerson).post(addPerson).delete(deletePerson);function getPeople(req,res){People.find({},function(err,people){if(err)res.send(err);else res.json(people);});}function findPerson(req,res){var name=req.body.name;People.find({'name':new RegExp(name,'i')},function(err,people){if(err)res.send(err);else res.json(people);});}function addPerson(req,res){var person=new People(_.extend({},req.body));person.save(function(err){if(err)res.send(err);else res.json(person);});}function deletePerson(req,res){var id=req.params.id;People.remove({_id:id},function(err,removed){if(err)res.send(err);else res.json(removed);});}module.exports=router;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(router,"router","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(getPeople,"getPeople","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(findPerson,"findPerson","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(addPerson,"addPerson","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(deletePerson,"deletePerson","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");}();;
-
-/***/ },
 /* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _mongoose=__webpack_require__(613);var _mongoose2=_interopRequireDefault(_mongoose);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// import Groups from './groups';
+	"use strict";var mongoose=__webpack_require__(614);var People=__webpack_require__(619);var _=__webpack_require__(617);var router=__webpack_require__(3).Router();router.route("/people/:id?").get(getPeople).post(findPerson).post(addPerson).delete(deletePerson);function getPeople(req,res){People.find({},function(err,people){if(err)res.send(err);else res.json(people);});}function findPerson(req,res){var name=req.body.name;People.find({'name':new RegExp(name,'i')},function(err,people){if(err)res.send(err);else res.json(people);});}function addPerson(req,res){var person=new People(_.extend({},req.body));person.save(function(err){if(err)res.send(err);else res.json(person);});}function deletePerson(req,res){var id=req.params.id;People.remove({_id:id},function(err,removed){if(err)res.send(err);else res.json(removed);});}module.exports=router;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(router,"router","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(getPeople,"getPeople","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(findPerson,"findPerson","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(addPerson,"addPerson","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");__REACT_HOT_LOADER__.register(deletePerson,"deletePerson","/Users/wangyansheng/Documents/code/wensu/src/controllers/peopleController.js");}();;
+
+/***/ },
+/* 619 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';var _mongoose=__webpack_require__(614);var _mongoose2=_interopRequireDefault(_mongoose);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// import Groups from './groups';
 	// Create a new schema for our tweet data
 	var peopleSchema=new _mongoose2.default.Schema({name:String,sex:String,group:Object//{group,unit}
 	},{collection:'people'});// // Create a static getTweets method to return tweet data from the db
@@ -49713,17 +49722,22 @@ require('source-map-support').install({environment: 'node'});
 	module.exports=_mongoose2.default.model('people',peopleSchema);;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(peopleSchema,'peopleSchema','/Users/wangyansheng/Documents/code/wensu/src/models/people.js');}();;
 
 /***/ },
-/* 619 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";var mongoose=__webpack_require__(613);var Checkin=__webpack_require__(620);var _=__webpack_require__(616);var router=__webpack_require__(3).Router();router.route("/checkins/:id?").get(getCheckins).post(addCheckin).delete(deleteCheckin);function getCheckins(req,res){Checkin.find(function(err,groups){if(err)res.send(err);else res.json(groups);});}function addCheckin(req,res){var group=new Checkin(_.extend({},req.body));group.save(function(err){if(err)res.send(err);else res.json(group);});}function deleteCheckin(req,res){var id=req.params.id;Group.remove({_id:id},function(err,removed){if(err)res.send(err);else res.json(removed);});}module.exports=router;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(router,"router","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");__REACT_HOT_LOADER__.register(getCheckins,"getCheckins","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");__REACT_HOT_LOADER__.register(addCheckin,"addCheckin","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");__REACT_HOT_LOADER__.register(deleteCheckin,"deleteCheckin","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");}();;
-
-/***/ },
 /* 620 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _mongoose=__webpack_require__(613);var _mongoose2=_interopRequireDefault(_mongoose);var _mongooseAutoIncrement=__webpack_require__(621);var _mongooseAutoIncrement2=_interopRequireDefault(_mongooseAutoIncrement);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// Create a new schema for our tweet data
-	var connection=_mongoose2.default.createConnection("mongodb://localhost:27017/wensu");_mongooseAutoIncrement2.default.initialize(connection);var schema=new _mongoose2.default.Schema({order:Number,person:Object},{collection:'checkins'});// // Create a static getTweets method to return tweet data from the db
+	"use strict";var mongoose=__webpack_require__(614);var Checkin=__webpack_require__(621);var _=__webpack_require__(617);// var express = require("express");
+	// var app = express();
+	var router=__webpack_require__(3).Router();router.route("/checkins/:id?").get(getCheckins).post(addCheckin).delete(deleteCheckin);router.route('/getMaxCheckin/:id?').get(getMaxCheckin);function getCheckins(req,res){Checkin.find(function(err,groups){if(err){res.send(err);}else{res.json(groups);}});}function getMaxCheckin(req,res){console.log('djosofsjoifjos');Checkin.findOne({}).sort({'order':-1}).limit(1).exec(function(err,groups){if(err)res.send(err);else res.json(groups);});}function addCheckin(req,res){console.log(req.body);var group=new Checkin(_.extend({},req.body));group.save(function(err){if(err)res.send(err);else res.json(group);});}function deleteCheckin(req,res){var id=req.params.id;Group.remove({_id:id},function(err,removed){if(err)res.send(err);else res.json(removed);});}module.exports=router;;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(router,"router","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");__REACT_HOT_LOADER__.register(getCheckins,"getCheckins","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");__REACT_HOT_LOADER__.register(getMaxCheckin,"getMaxCheckin","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");__REACT_HOT_LOADER__.register(addCheckin,"addCheckin","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");__REACT_HOT_LOADER__.register(deleteCheckin,"deleteCheckin","/Users/wangyansheng/Documents/code/wensu/src/controllers/checkinController.js");}();;
+
+/***/ },
+/* 621 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';var _mongoose=__webpack_require__(614);var _mongoose2=_interopRequireDefault(_mongoose);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// import autoIncrement from 'mongoose-auto-increment';
+	// Create a new schema for our tweet data
+	// var connection = mongoose.createConnection("mongodb://localhost:27017/wensu");
+	// autoIncrement.initialize(connection);
+	var schema=new _mongoose2.default.Schema({order:Number,person:Object},{collection:'checkins'});// // Create a static getTweets method to return tweet data from the db
 	// schema.statics.getTweets = function(page, skip, callback) {
 	//
 	//   var tweets = [],
@@ -49746,20 +49760,10 @@ require('source-map-support').install({environment: 'node'});
 	//   });
 	//
 	// };
-	schema.plugin(_mongooseAutoIncrement2.default.plugin,{model:'checkins',field:'order',startAt:1,incrementBy:1});// Return a Tweet model based upon the defined schema
-	module.exports=_mongoose2.default.model('checkins',schema);;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(connection,'connection','/Users/wangyansheng/Documents/code/wensu/src/models/checkin.js');__REACT_HOT_LOADER__.register(schema,'schema','/Users/wangyansheng/Documents/code/wensu/src/models/checkin.js');}();;
-
-/***/ },
-/* 621 */
-/***/ function(module, exports) {
-
-	module.exports = require("mongoose-auto-increment");
-
-/***/ },
-/* 622 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";var _stringify=__webpack_require__(593);var _stringify2=_interopRequireDefault(_stringify);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var $=__webpack_require__(595);var promise=__webpack_require__(596);var resourceUrl="http://localhost:9090/api/checkins";module.exports={addCheckin:function addCheckin(group){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl,data:(0,_stringify2.default)(group),method:"POST",dataType:"json",contentType:"application/json",success:resolve,error:reject});});},getCheckins:function getCheckins(){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl,method:"GET",dataType:"json",success:resolve,error:reject});});},deleteCheckin:function deleteCheckin(group){var Promise=promise.Promise;return new Promise(function(resolve,reject){$.ajax({url:resourceUrl+"/"+group._id,method:"DELETE",dataType:"json",success:resolve,error:reject});});}};;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(resourceUrl,"resourceUrl","/Users/wangyansheng/Documents/code/wensu/src/services/checkinService.js");}();;
+	// schema.plugin(autoIncrement.plugin, {model:'checkins',field:'order',startAt: 1,
+	//     incrementBy: 1});
+	// Return a Tweet model based upon the defined schema
+	module.exports=_mongoose2.default.model('checkins',schema);;var _temp=function(){if(typeof __REACT_HOT_LOADER__==='undefined'){return;}__REACT_HOT_LOADER__.register(schema,'schema','/Users/wangyansheng/Documents/code/wensu/src/models/checkin.js');}();;
 
 /***/ }
 /******/ ]);

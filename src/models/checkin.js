@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+// import autoIncrement from 'mongoose-auto-increment';
 // Create a new schema for our tweet data
-var connection = mongoose.createConnection("mongodb://localhost:27017/wensu");
-autoIncrement.initialize(connection);
+// var connection = mongoose.createConnection("mongodb://localhost:27017/wensu");
+// autoIncrement.initialize(connection);
 
 var schema = new mongoose.Schema({
-  order:Number
-  ,person   :Object
+  order: Number,
+  person   :Object
 },{collection:'checkins'});
 
 // // Create a static getTweets method to return tweet data from the db
@@ -32,7 +32,7 @@ var schema = new mongoose.Schema({
 //   });
 //
 // };
-schema.plugin(autoIncrement.plugin, {model:'checkins',field:'order',startAt: 1,
-    incrementBy: 1});
+// schema.plugin(autoIncrement.plugin, {model:'checkins',field:'order',startAt: 1,
+//     incrementBy: 1});
 // Return a Tweet model based upon the defined schema
 module.exports = mongoose.model('checkins', schema);

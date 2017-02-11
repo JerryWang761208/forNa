@@ -29,6 +29,20 @@ module.exports = {
             });
         });
     },
+
+    getMaxCheckin: function () {
+        var Promise = promise.Promise;
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: 'http://localhost:9090/api/getMaxCheckin/',
+                method: "GET",
+                dataType: "json",
+                success: resolve,
+                error: reject
+            });
+        });
+    },
+
     deleteCheckin: function (group) {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
