@@ -1,5 +1,24 @@
 import React from 'react';
-import { Button, Form, FormGroup, InputGroup, FormControl, ControlLabel, Icon, Col, Label, Popover, Grid, Row, Table } from '@sketchpixy/rubix';
+import { 
+	Button, 
+	Form, 
+	FormGroup,
+	InputGroup, 
+	FormControl, 
+	ControlLabel, 
+	Icon, 
+	Col, 
+	Label, 
+	Popover, 
+	Grid, 
+	Row, 
+	Table,
+	Checkbox,
+	Radio 
+} from '@sketchpixy/rubix';
+
+
+	//設定欄 放欄位篩選 例如：乾坤 大組 單位
 
 export default class Home extends React.Component {
 
@@ -13,11 +32,63 @@ export default class Home extends React.Component {
     // );
     return (
 			<Grid>
+			
+				<Row className="show-grid">
+					<Col xs={12}>
+						<Row className="show-grid">
+							<Col xs={3}>
+								<FormGroup>
+									<ControlLabel>乾坤</ControlLabel>
+									<div>
+										<Radio inline defaultValue='option1' defaultChecked name='inline-radio-options'>
+											乾道
+										</Radio>
+										<Radio inline defaultValue='option2'  name='inline-radio-options'>
+											坤道
+										</Radio>
+										
+									</div>
+								</FormGroup>
+							</Col>
+
+							<Col xs={3}>
+								<FormGroup controlId="dropdownselect">
+									<ControlLabel>大組</ControlLabel>
+									<FormControl componentClass="select" placeholder="select">
+										<option value='1'>第一組</option>
+										<option value='2'>第二組</option>
+										<option value='3'>第三組</option>
+										<option value='4'>第四組</option>
+										<option value='5'>第五組</option>
+										<option value='5'>第六組</option>
+									</FormControl>
+								</FormGroup>
+							</Col>
+
+							<Col xs={3}>
+								<FormGroup controlId="dropdownselect">
+									<ControlLabel>單位</ControlLabel>
+									<FormControl componentClass="select" placeholder="select">
+										<option value='1'>中邱</option>
+										<option value='2'>第二組</option>
+										<option value='3'>第三組</option>
+										<option value='4'>第四組</option>
+										<option value='5'>第五組</option>
+										<option value='5'>第六組</option>
+									</FormControl>
+								</FormGroup>
+							</Col>
+						</Row>
+						
+
+						
+					</Col>
+				</Row>
+
 				<Row className="show-grid">
 	  			<Col xs={12} md={8}>
 
 						<FormGroup controlId='searchbtnicon'>
-							
 							<Col sm={12}>
 								<InputGroup>
 									<FormControl type='text' placeholder='請輸入關鍵字 ...' onChange={this.search.bind(this)}/>
@@ -29,15 +100,16 @@ export default class Home extends React.Component {
 									</InputGroup.Addon>
 								</InputGroup>
 							</Col>
-					</FormGroup>
+						</FormGroup>
+						
 
 						<Table striped bordered condensed hover>
 							<thead>
 								<tr>
 								<th>#</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Username</th>
+								<th>姓名</th>
+								<th>大組</th>
+								<th>單位</th>
 								</tr>
 							</thead>
 							<tbody>
