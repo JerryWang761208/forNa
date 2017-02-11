@@ -19,12 +19,15 @@ import {
 
 import GroupService from '../services/groupService';
 import PeopleService from '../services/personService';
+import CheckinService from '../services/checkinService';
 	//設定欄 放欄位篩選 例如：乾坤 大組 單位
 
 export default class Home extends React.Component {
 	constructor() {
 	  super();
 	  this.search = this.search.bind(this);
+	  this.checkinPerson = this.checkinPerson.bind(this);
+
 		this.state = {
 			sex:'male',
 			groups:[],
@@ -44,6 +47,7 @@ export default class Home extends React.Component {
   }
 
 
+//搜尋
 	search(e) {
 		console.log('search');
 		let search = e.target.value;
@@ -56,6 +60,14 @@ export default class Home extends React.Component {
 			console.log(error);
 		});
 
+	}
+
+	//checkin
+	checkinPerson(person){
+		console.log(person);
+		CheckinService.addCheckin({person:person}).then((res)=>{
+			console.log('checkin:',res)
+		});
 	}
 
   render() {
@@ -158,7 +170,7 @@ export default class Home extends React.Component {
 												<td>{person.group.group}</td>
 												<td>{person.group.unit}</td>
 												<td style={{textAlign:'center'}}>
-													<Button bsStyle='green' rounded >
+													<Button bsStyle='green' rounded onClick={()=>this.checkinPerson(person)}>
 	  												<Icon glyph='icon-fontello-plus-3'/>
 													</Button>
 												</td>

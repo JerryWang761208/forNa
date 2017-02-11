@@ -11,10 +11,11 @@ import { renderHTMLString } from '@sketchpixy/rubix/lib/node/router';
 import RubixAssetMiddleware from '@sketchpixy/rubix/lib/node/RubixAssetMiddleware';
 
 import mongoose from 'mongoose';
-
+// import autoIncrement from 'mongoose-auto-increment';
 //controllers
 import groupController from './src/controllers/groupsController';
 import peopleController from './src/controllers/peopleController';
+import checkinController from './src/controllers/checkinController';
 
 const port = process.env.PORT || 9090;
 
@@ -26,6 +27,7 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(process.cwd(), 'public')));
 app.use("/api", groupController);
 app.use("/api", peopleController);
+app.use("/api", checkinController);
 app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'pug');
 
