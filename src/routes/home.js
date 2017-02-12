@@ -33,8 +33,10 @@ export default class Home extends React.Component {
 	  this.search = this.search.bind(this);
 	  this.checkinPerson = this.checkinPerson.bind(this);
 		this.updateCheckin = this.updateCheckin.bind(this);
+		this.getCounts = this.getCounts.bind(this);
+		this.changeSex = this.changeSex.bind(this);
 		this.state = {
-			sex:'乾',
+			sex:'坤',
 			groups:[],
 			searchGroups:[],
 			checkinPeople:[],
@@ -57,7 +59,11 @@ export default class Home extends React.Component {
 		// this.updateCheckin();
 		this.getCounts();
   }
-
+	changeSex(event){
+		const sexSelected = event.currentTarget.value;
+		this.setState({sex: sexSelected});
+		this.getCounts();
+	}
 	getCounts(){
 			CheckinService.getCount({'person.sex':'乾'}).then((res)=>{
 
@@ -187,7 +193,7 @@ export default class Home extends React.Component {
 
 								<FormGroup controlId="dropdownselect">
 									<ControlLabel>乾坤</ControlLabel>
-									<FormControl componentClass="select" placeholder="select">
+									<FormControl componentClass="select" placeholder="select" onChange={this.changeSex} value={this.state.sex}>
 										<option value='乾'>乾道</option>
 										<option value='坤'>坤道</option>
 									</FormControl>
