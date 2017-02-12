@@ -126,7 +126,7 @@ export default class Home extends React.Component {
 	search(e) {
 		console.log('search');
 		let search = e.target.value;
-		PeopleService.findPerson({name:search}).then((res)=>{
+		PeopleService.findPerson({name:search,sex:this.state.sex}).then((res)=>{
 			console.log('searchPeople:',res);
 			this.setState({
 				searchGroups:res

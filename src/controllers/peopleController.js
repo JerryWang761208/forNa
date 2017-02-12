@@ -19,8 +19,8 @@ function getPeople(req, res) {
 }
 
 function findPerson(req, res){
-    const {name} = req.body;
-    People.find({ 'name': new RegExp(name, 'i') },function (err, people) {
+    const {name,sex} = req.body;
+    People.find({ 'name': new RegExp(name, 'i'),'sex':sex },function (err, people) {
         if (err)
             res.send(err);
         else
