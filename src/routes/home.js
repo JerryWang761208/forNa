@@ -130,9 +130,21 @@ export default class Home extends React.Component {
 		let search = e.target.value;
 		PeopleService.findPerson({name:search,sex:this.state.sex}).then((res)=>{
 			console.log('searchPeople:',res);
-			this.setState({
-				searchGroups:res
+
+			res.map((each)=>{
+				CheckinService.getCount({'person._id':each._id}).then((checkRes)=>{
+					if(checkRes && checkRes.length>0){//如果有簽到了
+						each.order = checkRes[0].order;
+					}
+					this.setState({
+						searchGroups:res
+					});
+				});
 			});
+
+			// this.setState({
+			// 	searchGroups:res
+			// });
 		},(error)=>{
 			console.log(error);
 		});
@@ -149,7 +161,7 @@ export default class Home extends React.Component {
 				console.log('has checked');
 
 						this.setState({errorMsg:`${person.name} 已經簽到了`});
-				
+
 
 			}else{//new checkin
 				CheckinService.getMaxCheckin({'person.sex':person.sex}).then((res)=>{
@@ -268,11 +280,10 @@ export default class Home extends React.Component {
 						<Table striped bordered condensed hover>
 							<thead>
 								<tr>
-
-								<th>姓名</th>
-								<th>大組</th>
-								<th>單位</th>
-								<th>#</th>
+									<th>姓名</th>
+									<th>大組</th>
+									<th>單位</th>
+									<th>#</th>
 								</tr>
 							</thead>
 							<tbody >
@@ -284,11 +295,29 @@ export default class Home extends React.Component {
 												<td>{person.name}</td>
 												<td>{person.group.group}</td>
 												<td>{person.group.unit}</td>
-												<td style={{textAlign:'center'}}>
-													<Button bsStyle='green' rounded onClick={()=>this.checkinPerson(person)}>
-	  												<Icon glyph='icon-fontello-plus-3'/>
-													</Button>
-												</td>
+
+
+
+													{
+														person.order?
+
+																	<td style={{textAlign:'center'}}>
+																		{person.order}
+																	</td>
+
+
+														:
+
+																<td style={{textAlign:'center'}}>
+																	<Button bsStyle='green' rounded onClick={()=>this.checkinPerson(person)}>
+					  												<Icon glyph='icon-fontello-plus-3'/>
+																	</Button>
+																</td>
+															
+
+													}
+
+
 											</tr>
 										);
 									})
