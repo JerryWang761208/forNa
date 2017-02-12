@@ -3,6 +3,20 @@ var promise = require("es6-promise");
 var resourceUrl = "http://localhost:9090/api/checkins";
 
 module.exports = {
+    getCount: function(p){
+        var Promise = promise.Promise;
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: "http://localhost:9090/api/getCheckinCount",
+                data: JSON.stringify(p),
+                method: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                success: resolve,
+                error: reject
+            });
+        });
+    },
     addCheckin: function (group) {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
@@ -30,13 +44,16 @@ module.exports = {
         });
     },
 
-    getMaxCheckin: function () {
+    getMaxCheckin: function (data) {
+        console.log('data',data);
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
                 url: 'http://localhost:9090/api/getMaxCheckin/',
-                method: "GET",
+                data: JSON.stringify(data),
+                method: "POST",
                 dataType: "json",
+                contentType: "application/json",
                 success: resolve,
                 error: reject
             });

@@ -5,7 +5,21 @@ var _ = require("underscore");
 // var app = express();
 var router = require("express").Router();
 router.route("/checkins/:id?").get(getCheckins).post(addCheckin).delete(deleteCheckin);
-router.route('/getMaxCheckin/:id?').get(getMaxCheckin);
+router.route('/getMaxCheckin').post(getMaxCheckin);
+router.route('/getCheckinCount').post(getCount);
+
+function getCount(req,res){
+    var sex = req.body;
+
+    Checkin.find(sex).exec(function(err,groups){
+        if (err){
+            res.send(err);
+        }else{
+            res.json(groups);
+        }
+    });
+}
+
 
 function getCheckins(req, res) {
     Checkin.find(function (err, groups) {
@@ -20,18 +34,22 @@ function getCheckins(req, res) {
 }
 
 function getMaxCheckin(req,res){
-    console.log('djosofsjoifjos');
-    Checkin.findOne({}).sort({'order':-1}).limit(1).exec(function (err, groups) {
-        if (err)
+    var sex = req.body;
+    console.log('sex',req);
+    Checkin.find(sex).sort({'order':-1}).limit(1).exec(function (err, groups) {
+        if (err){
             res.send(err);
-        else
+        }else{
             res.json(groups);
+        }
+
     });
 }
 
 function addCheckin(req, res) {
     console.log(req.body);
     var group = new Checkin(_.extend({}, req.body));
+    
     group.save(function (err) {
         if (err)
             res.send(err);

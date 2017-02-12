@@ -14,7 +14,12 @@ import {
 	Row,
 	Table,
 	Checkbox,
-	Radio
+	Radio,
+	Thumbnail,
+	PanelContainer,
+	Panel,
+	PanelHeader,
+	PanelBody
 } from '@sketchpixy/rubix';
 
 import GroupService from '../services/groupService';
@@ -29,10 +34,16 @@ export default class Home extends React.Component {
 	  this.checkinPerson = this.checkinPerson.bind(this);
 		this.updateCheckin = this.updateCheckin.bind(this);
 		this.state = {
-			sex:'male',
+			sex:'乾',
 			groups:[],
 			searchGroups:[],
-			checkinPeople:[]
+			checkinPeople:[],
+			maleCheckinPeople:[],
+			femaleCheckinPeople:[],
+			malePeopleCnt:0,
+			femalePeopleCnt:0,
+			maleCheckinCnt:0,
+			femaleCheckinCnt:0
 		}
  }
 
@@ -43,15 +54,56 @@ export default class Home extends React.Component {
 				groups: res
 			})
 		});
-		this.updateCheckin();
-
+		// this.updateCheckin();
+		this.getCounts();
   }
+
+	getCounts(){
+			CheckinService.getCount({'person.sex':'乾'}).then((res)=>{
+
+				if(res){
+					let state = {
+						maleCheckinCnt:res.length,
+						maleCheckinPeople:res
+					};
+					if(this.state.sex == '乾'){
+						state.checkinPeople = res;
+					}
+					this.setState(state);
+				}else{
+					let state = {maleCheckinCnt:0};
+					if(this.state.sex == '乾'){
+						state.checkinPeople = [];
+					}
+					this.setState(state);
+				}
+			});
+			CheckinService.getCount({'person.sex':'坤'}).then((res)=>{
+				if(res){
+					let state = {
+						femaleCheckinCnt:res.length,
+						femaleCheckinPeople:res
+					};
+					if(this.state.sex == '坤'){
+						state.checkinPeople = res;
+					}
+					this.setState(state);
+				}else{
+					let state = {femaleCheckinCnt:0};
+					if(this.state.sex == '坤'){
+						state.checkinPeople = [];
+					}
+					this.setState(state);
+				}
+			});
+	}
 
 	updateCheckin(){
 		CheckinService.getCheckins().then((res)=>{
 			console.log('updateCheckin::::',res);
 			if(res){
 				console.log('get');
+
 				this.setState({
 					checkinPeople: res
 				})
@@ -83,11 +135,12 @@ export default class Home extends React.Component {
 	checkinPerson(person){
 
 		//獲得最大order
-		CheckinService.getMaxCheckin().then((res)=>{
+
+		CheckinService.getMaxCheckin({'person.sex':person.sex}).then((res)=>{
 			// console.log('maxCheckin:',res.order);
-			console.log('tstestst');
-			if(res){
-				let maxOrder = res.order;
+
+			if(res && res.length > 0){
+				let maxOrder = res[0].order;
 
 					console.log('maxOrder:',maxOrder);
 					CheckinService.addCheckin({
@@ -97,7 +150,8 @@ export default class Home extends React.Component {
 					})
 					.then((res)=>{
 						console.log('checkinPerson:',res)
-						this.updateCheckin();
+						// this.updateCheckin();
+						this.getCounts();
 					});
 
 			}else{//都沒人時候
@@ -108,7 +162,8 @@ export default class Home extends React.Component {
 				})
 				.then((res)=>{
 					console.log('checkinPerson:',res)
-					this.updateCheckin();
+					// this.updateCheckin();
+					this.getCounts();
 				});
 			}
 
@@ -129,17 +184,13 @@ export default class Home extends React.Component {
 					<Col xs={12}>
 						<Row className="show-grid">
 							<Col xs={3}>
-								<FormGroup>
-									<ControlLabel>乾坤</ControlLabel>
-									<div>
-										<Radio inline defaultValue='male' defaultChecked name='inline-radio-options'>
-											乾道
-										</Radio>
-										<Radio inline defaultValue='female'  name='inline-radio-options'>
-											坤道
-										</Radio>
 
-									</div>
+								<FormGroup controlId="dropdownselect">
+									<ControlLabel>乾坤</ControlLabel>
+									<FormControl componentClass="select" placeholder="select">
+										<option value='乾'>乾道</option>
+										<option value='坤'>坤道</option>
+									</FormControl>
 								</FormGroup>
 							</Col>
 
@@ -147,6 +198,7 @@ export default class Home extends React.Component {
 								<FormGroup controlId="dropdownselect">
 									<ControlLabel>大組</ControlLabel>
 									<FormControl componentClass="select" placeholder="select">
+										<option value='不分組'>不分組</option>
 										<option value='第一組'>第一組</option>
 										<option value='第二組'>第二組</option>
 										<option value='第三組'>第三組</option>
@@ -169,9 +221,12 @@ export default class Home extends React.Component {
 												);
 											})
 										}
-
 									</FormControl>
 								</FormGroup>
+							</Col>
+
+							<Col xs={3}>
+
 							</Col>
 						</Row>
 
@@ -181,7 +236,7 @@ export default class Home extends React.Component {
 				</Row>
 
 				<Row className="show-grid">
-	  			<Col xs={12} md={8}>
+	  			<Col xs={12} md={8} style={{height:'500px',overflow:'scroll'}}>
 
 						<FormGroup controlId='searchbtnicon'>
 							<Col sm={12}>
@@ -229,29 +284,75 @@ export default class Home extends React.Component {
 							</tbody>
 							</Table>
 					</Col>
-	  			<Col xs={6} md={4}>
-						<Table striped bordered condensed hover>
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>姓名</th>
-								</tr>
-							</thead>
-							<tbody >
-								{
-									this.state.checkinPeople.map((person)=>{
-										return (
-											<tr key={person._id}>
+	  			<Col xs={6} md={4} style={{height:'500px',overflow:'scroll'}}>
 
-												<td style={{textAlign:'center'}}>{person.order}</td>
-												<td>{person.person.name}</td>
+						<PanelContainer>
+						<Panel>
+						  <PanelHeader className='bg-green' style={{height:'51px'}}>
+							<Grid>
+							  <Row>
+								<Col xs={12} className='fg-white'>
+									<Form inline>
+										<h4>
+											<FormGroup controlId="formInlineName">
+											  <ControlLabel>乾</ControlLabel>
+											  {' '}
+		 										<Label>{`${this.state.maleCheckinCnt}`}</Label>
+											</FormGroup>
+											{' '}
+											<FormGroup controlId="formInlineEmail">
+											  <ControlLabel>坤</ControlLabel>
+											  {' '}
+		 										<Label>{`${this.state.femaleCheckinCnt}`}</Label>
+											</FormGroup>
 
+											{'    '}
+											<Button bsStyle="primary">
+											  更新
+											</Button>
+										</h4>
+								  </Form>
+								</Col>
+							  </Row>
+							</Grid>
+						  </PanelHeader>
+
+						  <PanelBody>
+							<Grid>
+							  <Row>
+								<Col xs={12} className="fg-white">
+									<Table striped bordered condensed hover style={{color:'black'}}>
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>姓名</th>
 											</tr>
-										);
-									})
-								}
-							</tbody>
-							</Table>
+										</thead>
+										<tbody >
+											{
+												this.state.checkinPeople.map((person)=>{
+													return (
+														<tr key={person._id}>
+
+															<td style={{textAlign:'center'}}>{person.order}</td>
+															<td>{person.person.name}</td>
+
+														</tr>
+													);
+												})
+											}
+										</tbody>
+									</Table>
+								</Col>
+							  </Row>
+							</Grid>
+						  </PanelBody>
+						</Panel>
+					  </PanelContainer>
+
+
+
+
 	  			</Col>
 				</Row>
 			</Grid>
