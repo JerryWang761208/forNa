@@ -48455,8 +48455,8 @@ require('source-map-support').install({environment: 'node'});
 	},function(error){console.log(error);});};//checkin
 	Home.prototype.checkinPerson=function checkinPerson(person){var _this6=this;//先看有沒有已經簽到了
 	_checkinService2.default.getCount({'person._id':person._id}).then(function(res){_this6.setState({errorMsg:''});if(res&&res.length>0){//has checkin
-	console.log('has checked');_this6.setState({errorMsg:person.name+' \u5DF2\u7D93\u7C3D\u5230\u4E86'});}else{//new checkin
-	_checkinService2.default.getMaxCheckin({'person.sex':person.sex}).then(function(res){if(res&&res.length>0){var maxOrder=res[0].order;_checkinService2.default.addCheckin({order:maxOrder+1,person:person}).then(function(res){console.log('checkinPerson:',res);// this.updateCheckin();
+	console.log('has checked');_this6.setState({errorMsg:person.name+' '+res[0].order+' \u865F \u5DF2\u7D93\u7C3D\u5230\u4E86'});}else{//new checkin
+	_checkinService2.default.getMaxCheckin({'person.sex':person.sex}).then(function(res){if(res&&res.length>0){var maxOrder=res[0].order;_checkinService2.default.addCheckin({order:maxOrder+1,person:person}).then(function(res){console.log('checkinPerson:',res);_this6.setState({errorMsg:res.person.name+' '+res.order+'\u865F'});// this.updateCheckin();
 	_this6.getCounts();});}else{//都沒人時候
 	_checkinService2.default.addCheckin({order:1,person:person}).then(function(res){console.log('checkinPerson:',res);// this.updateCheckin();
 	_this6.getCounts();});}},function(error){console.log('test',error);});}});//獲得最大order

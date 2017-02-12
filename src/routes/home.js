@@ -160,7 +160,7 @@ export default class Home extends React.Component {
 			if(res && res.length > 0){//has checkin
 				console.log('has checked');
 
-						this.setState({errorMsg:`${person.name} 已經簽到了`});
+						this.setState({errorMsg:`${person.name} ${res[0].order} 號 已經簽到了`});
 
 
 			}else{//new checkin
@@ -173,6 +173,9 @@ export default class Home extends React.Component {
 							})
 							.then((res)=>{
 								console.log('checkinPerson:',res)
+								this.setState({
+									errorMsg:`${res.person.name} ${res.order}號`
+								})
 								// this.updateCheckin();
 								this.getCounts();
 							});
@@ -296,8 +299,6 @@ export default class Home extends React.Component {
 												<td>{person.group.group}</td>
 												<td>{person.group.unit}</td>
 
-
-
 													{
 														person.order?
 
@@ -313,10 +314,9 @@ export default class Home extends React.Component {
 					  												<Icon glyph='icon-fontello-plus-3'/>
 																	</Button>
 																</td>
-															
+
 
 													}
-
 
 											</tr>
 										);
