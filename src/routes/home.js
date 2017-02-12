@@ -19,7 +19,8 @@ import {
 	PanelContainer,
 	Panel,
 	PanelHeader,
-	PanelBody
+	PanelBody,
+	Alert
 } from '@sketchpixy/rubix';
 
 import GroupService from '../services/groupService';
@@ -45,7 +46,8 @@ export default class Home extends React.Component {
 			malePeopleCnt:0,
 			femalePeopleCnt:0,
 			maleCheckinCnt:0,
-			femaleCheckinCnt:0
+			femaleCheckinCnt:0,
+			errorMsg:''
 		}
  }
 
@@ -140,42 +142,44 @@ export default class Home extends React.Component {
 	//checkin
 	checkinPerson(person){
 
+		//先看有沒有已經簽到了
+		CheckinService.getCount({'person._id':person._id}).then((res)=>{
+			this.setState({errorMsg:''});
+			if(res && res.length > 0){//has checkin
+				console.log('has checked');
+
+						this.setState({errorMsg:`${person.name} 已經簽到了`});
+				
+
+			}else{//new checkin
+				CheckinService.getMaxCheckin({'person.sex':person.sex}).then((res)=>{
+					if(res && res.length > 0){
+						let maxOrder = res[0].order;
+							CheckinService.addCheckin({
+								order:maxOrder+1,
+								person:person
+							})
+							.then((res)=>{
+								console.log('checkinPerson:',res)
+								// this.updateCheckin();
+								this.getCounts();
+							});
+					}else{//都沒人時候
+						CheckinService.addCheckin({
+							order:1,
+							person:person,
+						})
+						.then((res)=>{
+							console.log('checkinPerson:',res)
+							// this.updateCheckin();
+							this.getCounts();
+						});
+					}
+				},(error)=>{console.log('test',error)});
+			}
+		});
 		//獲得最大order
 
-		CheckinService.getMaxCheckin({'person.sex':person.sex}).then((res)=>{
-			// console.log('maxCheckin:',res.order);
-
-			if(res && res.length > 0){
-				let maxOrder = res[0].order;
-
-					console.log('maxOrder:',maxOrder);
-					CheckinService.addCheckin({
-
-						order:maxOrder+1,
-						person:person
-					})
-					.then((res)=>{
-						console.log('checkinPerson:',res)
-						// this.updateCheckin();
-						this.getCounts();
-					});
-
-			}else{//都沒人時候
-
-				CheckinService.addCheckin({
-					order:1,
-					person:person,
-				})
-				.then((res)=>{
-					console.log('checkinPerson:',res)
-					// this.updateCheckin();
-					this.getCounts();
-				});
-			}
-
-
-
-		},(error)=>{console.log('test',error)});
 
 	}
 
@@ -232,7 +236,9 @@ export default class Home extends React.Component {
 							</Col>
 
 							<Col xs={3}>
-
+								<Alert danger>
+								  <strong>{this.state.errorMsg}</strong>
+								</Alert>
 							</Col>
 						</Row>
 
