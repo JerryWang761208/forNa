@@ -61,7 +61,7 @@ export default class Home extends React.Component {
   }
 	changeSex(event){
 		const sexSelected = event.currentTarget.value;
-		this.setState({sex: sexSelected});
+		this.setState({sex: sexSelected,searchGroups:[]});
 		this.getCounts();
 	}
 	getCounts(){
