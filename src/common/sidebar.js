@@ -31,6 +31,7 @@ class ApplicationSidebar extends React.Component {
 
                   <SidebarNavItem glyph='icon-fontello-gauge' name='首頁' href='/' />
                   <SidebarNavItem glyph='icon-ikons-login' name='Login' href='/login' />
+                  <SidebarNavItem glyph='icon-simple-line-icons-layers' name='後台管理' href='/manage' />
                 </SidebarNav>
               </div>
             </Col>

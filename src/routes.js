@@ -12,6 +12,8 @@ import Sidebar from './common/sidebar';
 /* Pages */
 import Home from './routes/home';
 import Login from './routes/Login';
+import Manage from './routes/Manage';
+
 class App extends React.Component {
   render() {
     return (
@@ -37,5 +39,6 @@ export default (
   <Route path='/' component={App}>
     <IndexRoute component={Home} />
     <Route path='login' component={Login}/>
+    <Route path='manage' component={Manage}/>
   </Route>
 );

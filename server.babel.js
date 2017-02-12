@@ -20,12 +20,22 @@ import checkinController from './src/controllers/checkinController';
 
 var Papa = require('babyparse');
 var fs = require('fs');
-var file = 'text.csv';
+var file = './documents/text.csv';
 
 const port = process.env.PORT || 9090;
 
 
+
 let app = express();
+
+
+//cross domain problems
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json())
@@ -36,7 +46,8 @@ app.use("/api", checkinController);
 app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'pug');
 
-app.get('/csv2json',(req, res)=>{
+
+app.get('/api/csv2json',(req, res)=>{
   var content = fs.readFileSync(file, { encoding: 'utf8' });
   var arr = Papa.parse(content,{
 	header: true
@@ -62,7 +73,7 @@ function array2json(arr){
     eachJson.group = gpJson;
     json.push(eachJson);
   });
-  console.log(json);
+
   return json;
 }
 

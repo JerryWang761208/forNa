@@ -1,13 +1,19 @@
 var $ = require("jquery");
 var promise = require("es6-promise");
-var resourceUrl = "http://localhost:9090/api/checkins";
+// var baseUrl = 'http://192.168.31.171:9090';
+var baseUrl = '';
+var resourceUrl = baseUrl + "/api/checkins";
 
 module.exports = {
+    getBaseUrl:function(url){
+        baseUrl = url;
+    },
     getCount: function(p){
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
-                url: "http://localhost:9090/api/getCheckinCount",
+                crossOrigin: true,
+                url: baseUrl + "/api/getCheckinCount",
                 data: JSON.stringify(p),
                 method: "POST",
                 dataType: "json",
@@ -21,6 +27,7 @@ module.exports = {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
+                crossOrigin: true,
                 url: resourceUrl,
                 data: JSON.stringify(group),
                 method: "POST",
@@ -35,6 +42,7 @@ module.exports = {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
+                crossOrigin: true,
                 url: resourceUrl,
                 method: "GET",
                 dataType: "json",
@@ -49,7 +57,8 @@ module.exports = {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
-                url: 'http://localhost:9090/api/getMaxCheckin/',
+                crossOrigin: true,
+                url: baseUrl + '/api/getMaxCheckin/',
                 data: JSON.stringify(data),
                 method: "POST",
                 dataType: "json",
@@ -64,6 +73,7 @@ module.exports = {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
+                crossOrigin: true,
                 url: resourceUrl + "/" + group._id,
                 method: "DELETE",
                 dataType: "json",

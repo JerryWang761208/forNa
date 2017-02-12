@@ -1,12 +1,18 @@
 var $ = require("jquery");
 var promise = require("es6-promise");
-var resourceUrl = "http://localhost:9090/api/groups";
+// var baseUrl = 'http://192.168.31.171:9090';
+var baseUrl = '';
+var resourceUrl = baseUrl + "/api/groups";
 
 module.exports = {
+    getBaseUrl:function(url){
+        baseUrl = url;
+    },
     addGroup: function (group) {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
+                crossOrigin: true,
                 url: resourceUrl,
                 data: JSON.stringify(group),
                 method: "POST",
@@ -18,9 +24,12 @@ module.exports = {
         });
     },
     getGroups: function () {
+        // resourceUrl = this.baseUrl + "/api/groups";
+
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
+                crossOrigin: true,
                 url: resourceUrl,
                 method: "GET",
                 dataType: "json",
@@ -33,6 +42,7 @@ module.exports = {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
+                crossOrigin: true,
                 url: resourceUrl + "/" + group._id,
                 method: "DELETE",
                 dataType: "json",

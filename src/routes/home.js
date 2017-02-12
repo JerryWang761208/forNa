@@ -1,3 +1,4 @@
+// var baseUrl = '';
 import React from 'react';
 import {
 	Button,
@@ -36,6 +37,7 @@ export default class Home extends React.Component {
 		this.updateCheckin = this.updateCheckin.bind(this);
 		this.getCounts = this.getCounts.bind(this);
 		this.changeSex = this.changeSex.bind(this);
+		// GroupService.bind(this);
 		this.state = {
 			sex:'坤',
 			groups:[],
@@ -47,11 +49,17 @@ export default class Home extends React.Component {
 			femalePeopleCnt:0,
 			maleCheckinCnt:0,
 			femaleCheckinCnt:0,
-			errorMsg:''
+			errorMsg:'',
+			baseUrl:''
 		}
  }
 
 	componentDidMount() {
+
+		// this.setState({baseUrl:window.location.origin});
+		GroupService.getBaseUrl(window.location.origin);
+		PeopleService.getBaseUrl(window.location.origin);
+		CheckinService.getBaseUrl(window.location.origin);
 		GroupService.getGroups().then((res)=>{
 			console.log(res);
 			this.setState({
@@ -60,6 +68,7 @@ export default class Home extends React.Component {
 		});
 		// this.updateCheckin();
 		this.getCounts();
+
   }
 	changeSex(event){
 		const sexSelected = event.currentTarget.value;
@@ -187,6 +196,9 @@ export default class Home extends React.Component {
 						.then((res)=>{
 							console.log('checkinPerson:',res)
 							// this.updateCheckin();
+							this.setState({
+								errorMsg:`${res.person.name} ${res.order}號`
+							})
 							this.getCounts();
 						});
 					}
@@ -207,7 +219,7 @@ export default class Home extends React.Component {
 
 				<Row className="show-grid">
 					<Col xs={12}>
-						<Row className="show-grid">
+						<Row className="">
 							<Col xs={3}>
 
 								<FormGroup controlId="dropdownselect">

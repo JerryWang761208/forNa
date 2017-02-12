@@ -3,8 +3,8 @@ var People = require("../models/people");
 var _ = require("underscore");
 
 var router = require("express").Router();
-router.route("/people/:id?").get(getPeople).post(findPerson).post(addPerson).delete(deletePerson);
-
+router.route("/people/:id?").get(getPeople).post(findPerson).delete(deletePerson);
+router.route("/import").post(addPerson);
 
 
 
