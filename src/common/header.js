@@ -43,13 +43,13 @@ export default class Header extends React.Component {
             <Navbar fixedTop fluid id='rubix-nav-header'>
               <Row>
                 <Col xs={3} visible='xs'>
-                  <SidebarBtn />
+                  
                 </Col>
                 <Col xs={6} sm={4}>
                   <Brand />
                 </Col>
                 <Col xs={3} sm={8} collapseRight className='text-right'>
-                  <HeaderNavigation />
+                  
                 </Col>
               </Row>
             </Navbar>

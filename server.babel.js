@@ -16,7 +16,7 @@ import mongoose from 'mongoose';
 import groupController from './src/controllers/groupsController';
 import peopleController from './src/controllers/peopleController';
 import checkinController from './src/controllers/checkinController';
-
+import userController from './src/controllers/userController';
 
 var Papa = require('babyparse');
 var fs = require('fs');
@@ -43,6 +43,7 @@ app.use(express.static(path.join(process.cwd(), 'public')));
 app.use("/api", groupController);
 app.use("/api", peopleController);
 app.use("/api", checkinController);
+app.use("/api", userController);
 app.set('views', path.join(process.cwd(), 'views'));
 app.set('view engine', 'pug');
 
@@ -105,7 +106,7 @@ app.listen(port, () => {
 
 
 // Connect to our mongo database
-mongoose.connect('mongodb://localhost:27017/wensu');
+mongoose.connect('mongodb://c1495616:jerry210492@ds161039.mlab.com:61039/tainan_university');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
